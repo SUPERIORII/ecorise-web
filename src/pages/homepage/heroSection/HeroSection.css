@@ -1,0 +1,100 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.image-slider-wrapper {
+  width: 100%;
+  max-width: 1350px;
+  position: relative;
+  color: white;
+  height: 430px;
+  overflow: hidden;
+}
+
+.img {
+  width: 100%;
+  height: 70vh;
+  object-position: center;
+
+  /* transform: translateX(200%); */
+}
+
+.image-overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 3rem 6rem;
+}
+
+.slides {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+ transition: transform .6s ease-in;
+}
+
+.image-overlay .overlay-info h1 {
+  font-size: 2.5rem;
+}
+.image-overlay .overlay-info h4 {
+  font-size: 1.5rem;
+  text-transform: capitalize;
+}
+.image-overlay .overlay-info p {
+  max-width: 60%;
+  margin: 20px 10px 20px 0;
+}
+
+.overlay-btn {
+  margin-top: 4rem;
+
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
+.hero-donate-btn,
+.getinvolve-btn {
+  background: #9c5f34;
+  color: white;
+  margin-right: 20px;
+}
+
+.slide-left,
+.slide-right {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  transition: opacity display 0.3s ease-in-out;
+  cursor: pointer;
+  opacity: 0.5;
+  top: 50%;
+}
+
+.slide-left {
+  left: 1%;
+}
+.slide-right {
+  right: 1%;
+}
+
+.slide-left:hover,
+.slide-right:hover {
+  opacity: 1;
+}
+.slide-left:focus-within,
+.slide-right:focus-within {
+  opacity: 1;
+}
+
+
+.hide {
+  display: none;
+}
