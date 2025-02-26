@@ -1,0 +1,42 @@
+
+GET http://localhost:3000/api/find/user
+
+###
+POST http://localhost:3000/egi/api/news
+Content-Type: application/json
+
+{
+   "name": "hi"
+}
+
+###
+POST http://localhost:3000/api/auth/register
+Content-Type: application/json
+
+{
+   "adminRole": "admin",
+    "username":"adama12", 
+    "email":"adama@gmail.com", 
+    "role":"superior admin", 
+    "password": "adama"
+}
+
+###
+GET http://localhost:3000/
+
+
+
+###
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json
+ 
+{
+   "email": "ab@gmail.com",
+   "password": "1234"
+}
+
+
+###
+POST http://localhost:3000/api/auth/logout
+Content-Type: application/json
+ 
