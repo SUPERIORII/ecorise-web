@@ -47,7 +47,7 @@ export const profilePictures = [
     id: 3,
     name: "Sekou M. Nyei",
     rank: "Scientists",
-    img: `../src/assets/profilePictures/img-8.jpg`,
+    img: `x`,
   },
   {
     id: 4,

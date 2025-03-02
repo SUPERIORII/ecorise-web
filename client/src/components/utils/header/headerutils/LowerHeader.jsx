@@ -3,13 +3,20 @@ import logo from "/src/assets/logo.png";
 import { FaSearch } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
+import { useAuthContext } from "../../../../context/AppContext";
+import CurrentUser from "./CurrentUser";
+
 
 const LowerHeader = ({ links, setLinks }) => {
   const [selected, setIsSelected] = useState(null);
   const [showMenu, setShowmenu] = useState(false);
 
+  const { currentUser } = useAuthContext();
+
+  console.log(currentUser);
   // toogling the close and menu icons
   const displayIcon = () => {
+    
     setShowmenu(!showMenu);
   };
 
@@ -21,6 +28,7 @@ const LowerHeader = ({ links, setLinks }) => {
 
   return (
     <div className="lowerHeader">
+     
       <section className="left-lower-header">
         {showMenu ? (
           <AiOutlineClose className="nav-close-icon" onClick={displayIcon} />
@@ -67,7 +75,11 @@ const LowerHeader = ({ links, setLinks }) => {
 
       {/* =================right middle header===================== */}
       <section className="donate-btn-container">
-        <button className="donate-btn">Donate Now</button>
+        {currentUser ? (
+          <CurrentUser/>
+        ) : (
+          <button className="donate-btn">Donate Now</button>
+        )}
       </section>
     </div>
   );

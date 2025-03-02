@@ -108,7 +108,7 @@ const login = (req, res) => {
 };
 
 const logout = (req, res) => {
-  res.clearCookie("infoToken").json("user has been logout");
+  res.clearCookie("infoToken").json("logging out");
 };
 
 module.exports = { register, login, logout };

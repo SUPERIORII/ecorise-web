@@ -9,8 +9,7 @@ const Wrapper = styled.header`
     right: 0;
     background-color: var(--white-100);
     z-index: 100;
-
-    height: 9em;
+    
     padding-top: 1rem;
     box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
     /* border: 1px solid red; */

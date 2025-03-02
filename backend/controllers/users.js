@@ -10,7 +10,11 @@ const users = (req, res) => {
 
     const { password, ...others } = result[0];
 
-    res.json(others);
+    // res.json(others);
+
+    res.json(others)
+    
+
   });
 };
 

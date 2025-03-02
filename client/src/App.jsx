@@ -10,9 +10,10 @@ import {
   Resources,
   HomeLayout,
   PageNotFound,
-  Login,
-  Register,
+  
 } from "../src/pages";
+
+import {Login,Register,} from "./Authentications/index"
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "react-toastify/ReactToastify.css";
 

@@ -24,6 +24,9 @@
   --rounded-radius-20: 20px;
   --rounded-radius-30: 30px;
   --color-duration:   #a1a1a1;
+  --color-success: #07bc0c;
+  --color-dark:#121212;
+  --color-light:  #fff;
 
   --box-shadow: 0 0 25px rgba(0,0,0,.2);
 }
@@ -62,7 +65,7 @@ body {
   min-width: 320px;
   min-height: 100vh;
 
-  padding-top: 9rem;
+  /* padding-top: 9rem; */
 }
 
 

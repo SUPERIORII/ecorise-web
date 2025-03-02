@@ -2,9 +2,7 @@ const db = require("./database");
 const bcrypt = require("bcrypt");
 const inquirer = require("inquirer");
 
-// const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-// console.log(regex.test("abra@gmail"));
 
 const createAdminUser = async () => {
   try {
