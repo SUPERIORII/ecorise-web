@@ -6,4 +6,6 @@ export { default as Project } from "./project/Project";
 export { default as Resources } from "./Resources/Resources";
 export { default as HomeLayout } from "./HomeLayout";
 export { default as PageNotFound } from "./PageNotFound";
+export { default as LandingSkeleton } from "../components/utils/skeleton/LandingSkeleton";
+export {default as Profile} from "../pages/profile/Profile"
 

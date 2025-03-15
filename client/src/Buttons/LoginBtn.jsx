@@ -1,8 +1,7 @@
 import React from "react";
 import { useAuthContext } from "../context/AppContext";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import { LoginButton } from "./Buttons";
-
 
 const LoginBtn = ({ inputs }) => {
   const { login } = useAuthContext();

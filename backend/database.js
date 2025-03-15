@@ -5,7 +5,7 @@ const db = mysql2.createConnection({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME
+  database: process.env.DB_NAME,
 });
 
 db.connect((err) => {
@@ -26,13 +26,17 @@ const createTables = () => {
   CREATE TABLE IF NOT EXISTS users(
     id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(40) NOT NULL,
+    shadowname VARCHAR(255) NOT NULL UNIQUE,
     email VARCHAR(40) NOT NULL UNIQUE,
+    first_name VARCHAR(255),
+    Last_name VARCHAR(255),
     password VARCHAR(255),
-    user_role ENUM("admin", "super_admin"),
-    user_profile VARCHAR(255)
+    user_role ENUM("admin", "super admin"),
+    user_profile VARCHAR(255),
+    create_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )
   `;
-  db.query(userTableQuery, function(err) {
+  db.query(userTableQuery, function (err) {
     if (err) {
       console.log("error creating user table:", err.message);
       return;
@@ -60,16 +64,15 @@ const createTables = () => {
     console.log("organization table created successfully");
   });
 
-
   // project table query
   const projectTableQuery = ` 
-  CREATE TABLE IF NOT EXISTS organization(
+  CREATE TABLE IF NOT EXISTS project(
     id INT AUTO_INCREMENT PRIMARY KEY,
-    title VARCHAR(255) NOT NULL,
+    title VARCHAR(255) NOT NULL UNIQUE,
     description VARCHAR(255),
-    created_date DATE,
-    ended_date DATE,
+    project_img VARCHAR(255) NOT NULL UNIQUE,
     user_id INT,
+    created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id)
     )
   `;
@@ -89,8 +92,8 @@ const createTables = () => {
     title VARCHAR(255) NOT NULL,
     description VARCHAR(255),
     user_id INT,
-    created_date DATE,
-    new_url VARCHAR(255),
+    created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    news_img VARCHAR(255) NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id)
     )
   `;
@@ -102,9 +105,52 @@ const createTables = () => {
 
     console.log("news table created successfully");
   });
+
+  //member table query
+  const memberTableQuery = ` 
+  CREATE TABLE IF NOT EXISTS members(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    member_title VARCHAR(255) NOT NULL,
+    user_id INT,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+    )
+  `;
+  db.query(memberTableQuery, function (err) {
+    if (err) {
+      console.log("error creating members table:", err.message);
+      return;
+    }
+
+    console.log("members table created successfully");
+  });
+
+  //member table query
+  const socialLinksTableQuery = ` 
+  CREATE TABLE IF NOT EXISTS social_links(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    facebook_link VARCHAR(255),
+    whatsApp_link VARCHAR(255),
+    instagram_link VARCHAR(255),
+    member_id INT,
+    FOREIGN KEY (member_id) REFERENCES members(id)
+    )
+  `;
+  db.query(socialLinksTableQuery, function (err) {
+    if (err) {
+      console.log("error creating Social Links table:", err.message);
+      return;
+    }
+
+    console.log("Social Links table created successfully");
+  });
 };
 
-
 createTables();
-module.exports = db;
 
+// db.query("DROP DATABASE egi_database", (err, result) => {
+//   if (err) return console.log(err.message);
+//   console.log("database is drop");
+// });
+
+
+module.exports = db;

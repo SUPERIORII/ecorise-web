@@ -1,97 +1,104 @@
 import React from "react";
 import "../homenews/HomeNews.css";
+import { useQuery } from "@tanstack/react-query";
+import customUrl from "../../../basedUrl";
+import LeftHomeNewSkeleton from "./LeftHomeNewSkeleton";
+import RightHomeNewSkeleton from "./RightHomeNewSkeleton";
 
 const HomeNews = () => {
+  // latest news
+  const latestNews = useQuery({
+    queryKey: ["latestNews"],
+    queryFn: async () => {
+      const response = await customUrl.get("/api/news/latest-news");
+      return response.data;
+    },
+  });
+
+  // all News
+  const allNews = useQuery({
+    queryKey: ["allNews"],
+    queryFn: async () => {
+      const response = await customUrl.get("/api/news/fetch-news");
+      return response.data;
+    },
+  });
+
+  console.log(allNews.data);
+
   return (
     <div className="news-ergi-container">
       <p className="news-title">{"LATEST NEWS".toUpperCase()}</p>
 
       <div className="ergi-news-wrapper">
-        <section className="left-section">
-          <img src="/src/assets/03a6acdf091c4972ac8bcc3e65d010de.jpg" alt="" />
+        {/* latest news */}
+        {latestNews.isError ? (
+          "Something went wrong"
+        ) : latestNews.isLoading ? (
+          <LeftHomeNewSkeleton />
+        ) : (
+          latestNews.data.map((latestnew) => {
+            const {
+              newsId,
+              userId,
+              title,
+              description,
+              newsImg,
+              createdDate,
+              relativeTime,
+              newsTime,
+            } = latestnew;
 
-          <div className="latest-info">
-            <p className="lt-section-category">
-              category: <span>Climate</span>
-            </p>
-            <h4>
-              Liberia highest court must hold states accountable on climate
-              change
-            </h4>
+            return (
+              <section className="left-section" key={newsId}>
+                <div className="latest-img-wrapper">
+                  <img src={newsImg} alt={title} />
+                </div>
 
-            <p className="duration">July 20, 2024 &#00; 3hours ago</p>
-          </div>
-        </section>
+                <div className="latest-info">
+                  <p className="lt-section-category">
+                    category: <span>Climate</span>
+                  </p>
+                  <h4>{title}</h4>
+
+                  <p className="duration">
+                    {createdDate} @{newsTime} &#00; {relativeTime}
+                  </p>
+                </div>
+              </section>
+            );
+          })
+        )}
+
+        {/* all news */}
 
         <section className="rigt-section">
-          <div className="right-section-list">
-            <div className="">
-              <img
-                src="/src/assets/03a6acdf091c4972ac8bcc3e65d010de.jpg"
-                alt=""
-              />
-            </div>
+          {allNews.isError ? (
+            "error loading all news"
+          ) : allNews.isLoading ? (
+            <RightHomeNewSkeleton />
+          ) : (
+            allNews.data.map((news) => {
+              return (
+                <div className="right-section-list" key={news.newsId}>
+                  <div className="">
+                    <img src={news.newsImg} alt={news.title} />
+                  </div>
 
-            <div className="latest-info">
-              <p className="rt-section-category">
-                category: <span>Climate</span>
-              </p>
-              <h4 className="rt-section-title">
-                Liberia highest court must hold states accountable on climate
-                change
-              </h4>
+                  <div className="latest-info">
+                    <p className="rt-section-category">
+                      category: <span>Climate</span>
+                    </p>
+                    <h4 className="rt-section-title">{news.title}</h4>
 
-              <p className="rt-section-duration">
-                July 20, 2024 &#00; 3hours ago
-              </p>
-            </div>
-          </div>
-
-          <div className="right-section-list">
-            <div className="">
-              <img
-                src="/src/assets/03a6acdf091c4972ac8bcc3e65d010de.jpg"
-                alt=""
-              />
-            </div>
-
-            <div className="latest-info">
-              <p className="rt-section-category">
-                category: <span>Climate</span>
-              </p>
-              <h4 className="rt-section-title">
-                Liberia highest court must hold states accountable on climate
-                change
-              </h4>
-
-              <p className="rt-section-duration">
-                July 20, 2024 &#00; 3hours ago
-              </p>
-            </div>
-          </div>
-
-          <div className="right-section-list">
-            <div className="">
-              <img
-                src="/src/assets/03a6acdf091c4972ac8bcc3e65d010de.jpg"
-                alt=""
-              />
-            </div>
-
-            <div className="latest-info">
-              <p className="rt-section-category">
-                category: <span>Climate</span>
-              </p>
-              <h4 className="rt-section-title">
-                Liberia highest court must hold states accountable on climate
-                change
-              </h4>
-
-              <p className="rt-section-duration">
-                July 20, 2024 &#00; 3hours ago
-              </p>
-            </div>
-          </div>
+                    <p className="rt-section-duration">
+                      {news.createdDate} &#00; {news.relativeTime}
+                    </p>
+                  </div>
+                </div>
+              );
+            })
+          )}
         </section>
       </div>
     </div>

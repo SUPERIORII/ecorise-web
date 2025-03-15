@@ -1,12 +1,42 @@
 
-GET http://localhost:3000/api/find/user
+GET http://localhost:3000/api/user
 
 ###
-POST http://localhost:3000/egi/api/news
+
+GET http://localhost:3000/api/user/find/adama12_h_ayxn
+
+
+###
+GET  http://localhost:3000/api/news/latest-news
+Content-Type: application/json
+
+
+###
+GET  http://localhost:3000/api/news/fetch-news
+Content-Type: application/json
+
+
+###
+POST http://localhost:3000/api/news/add-news
 Content-Type: application/json
 
 {
-   "name": "hi"
+   "title": "Green plant is a great way to experiement the future",
+   "description": "this is green plant discription",
+   "newsImg": "../src/assets/profilePictures/img-1.jpg"
+}
+###
+GET http://localhost:3000/projects/fetchProject
+Content-Type: application/json
+###
+
+POST http://localhost:3000/projects/addProject
+Content-Type: application/json
+
+{
+   "title": "first project title",
+   "description": "eeeeeeeeekeowoi euieinreo eorewon eeone lwl",
+   "projectImg": "../src/assets/profilePictures/img-7.jpg"
 }
 
 ###
@@ -14,11 +44,10 @@ POST http://localhost:3000/api/auth/register
 Content-Type: application/json
 
 {
-   "adminRole": "admin",
-    "username":"adama12", 
-    "email":"adama@gmail.com", 
-    "role":"superior admin", 
-    "password": "adama"
+    "username":"abraham", 
+    "email":"ab@gmail.com", 
+    "role":"admin", 
+    "password": "abraham"
 }
 
 ###

@@ -1,8 +1,7 @@
 const db = require("./database");
 const bcrypt = require("bcrypt");
 const inquirer = require("inquirer");
-
-
+const getShadowName = require("./controllers/generateObfuscateName");
 
 const createAdminUser = async () => {
   try {
@@ -17,6 +16,7 @@ const createAdminUser = async () => {
           return true;
         },
       },
+
       {
         type: "input",
         name: "email",
@@ -42,7 +42,9 @@ const createAdminUser = async () => {
       },
     ]);
 
+    const randomString = getShadowName(6);
     const { userName, email, password, userRole } = acquireUserDetails;
+    const shadowName = `${userName}_${randomString}`;
 
     // check if the super admin exist
     const query = "SELECT * FROM users WHERE email =?";
@@ -55,11 +57,11 @@ const createAdminUser = async () => {
       const hashPassword = await bcrypt.hash(password, 15);
       // //   store the admin in the database
       const query =
-        "INSERT INTO users(username, email, password, user_role) VALUES(?,?,?,?)";
+        "INSERT INTO users(username, shadowname, email, password, user_role) VALUES(?,?,?,?,?)";
       db.query(
         query,
-        [userName, email, hashPassword, userRole],
-        (err, result) => {
+        [userName, shadowName, email, hashPassword, userRole],
+        (err) => {
           if (err) return console.log(err.message);
           console.log("Admin has been created");
         }

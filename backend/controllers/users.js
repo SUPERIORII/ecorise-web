@@ -12,10 +12,22 @@ const users = (req, res) => {
 
     // res.json(others);
 
-    res.json(others)
-    
-
+    res.json(others);
   });
 };
 
-module.exports = { users };
+const getUser = (req, res) => {
+  const psudoname = req.params.psudoname;
+
+  const query = "SELECT * FROM users WHERE shadowname=?";
+
+  db.query(query, [psudoname], (err, result) => {
+    if (err) return res.status(500).json("something went wrong...");
+
+    const { password, ...others } = result[0];
+
+    res.status(200).json(others);
+  });
+};
+
+module.exports = { users, getUser };

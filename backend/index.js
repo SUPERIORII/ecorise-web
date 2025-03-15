@@ -25,18 +25,27 @@ app.use(
   })
 );
 // require routes
-const newRoute = require("./routes/newRoute");
+const newRoute = require("./routes/new");
 const authRoute = require("./routes/authentication");
 const userRoute = require("./routes/user")
+const projectRoute = require("./routes/project")
 
 // Routes
 app.use("/api/auth", authRoute);
-app.use("/egi/api/news", newRoute);
-app.use("/api/find", userRoute)
+app.use("/api/news", newRoute);
+app.use("/api", userRoute)
+app.use("/projects", projectRoute)
 
 app.get("/", (req, res) => {
   res.send("Server is running");
 });
+
+
+// const formatDate = time.format("MMM Do YYY, h:mm:ss a")
+// console.log(formatDate);
+// console.log(time);
+
+
 
 
 

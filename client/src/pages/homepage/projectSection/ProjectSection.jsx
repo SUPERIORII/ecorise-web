@@ -1,129 +1,86 @@
 import React from "react";
 import "./ProjectSection.css";
 import Title from "../../../components/utils/title/Title";
+import { useQuery } from "@tanstack/react-query";
+import customUrl from "../../../basedUrl";
+import LandingSkeleton from "../../../components/utils/skeleton/LandingSkeleton";
+import { BsPerson, BsPersonCircle } from "react-icons/bs";
+import { Link } from "react-router-dom";
 
 const ProjectSection = () => {
+  const { isError, isLoading, data } = useQuery({
+    queryKey: ["getPost"],
+    queryFn: async () => {
+      const response = await customUrl.get("/projects/fetchProject");
+      return response.data;
+    },
+  });
+
+  
+
   return (
     <div className="ergi-project-container">
       <Title title="Our Projects" />
 
-      <section className="project-wrapper">
-        <div className="project-preview">
-          <div className="project-img-container">
-            <img
-              src="/src/assets/03a6acdf091c4972ac8bcc3e65d010de.jpg"
-              alt="img"
-            />
-          </div>
+      {isError ? (
+        "Something went wrong"
+      ) : isLoading ? (
+        <LandingSkeleton />
+      ) : (
+        <section className="project-wrapper">
+          {data.result.map((project) => {
+            const {
+              projectId,
+              username,
+              userProfile,
+              projectImg,
+              createdAt,
+              description,
+              psudoName,
+              userId,
+              relativeDuration,
+              title,
+            } = project;
 
-          <div className="project-info">
-            <div className="cover-img">
-              <img src="/src/assets/img-2.jpg" alt="" />
-            </div>
+            console.log(project);
 
-            <div className="info">
-              <p className="project-desc">
-                Green plants are going to Extinct about 500 times faster...
-              </p>
-            </div>
-          </div>
-          <div className="more-info">
-            <div>
-              <h5>Greenpeace</h5>
-              <p>Jul 13, 2024 3 . weeks ago</p>
-            </div>
+            return (
+              <div className="project-preview" key={projectId}>
+                <div className="project-img-container">
+                  <img src={projectImg} alt="img" />
+                </div>
 
-            <button>Learn More</button>
-          </div>
-        </div>
+                {/* project profile picture */}
+                <section className="project-info">
 
-        <div className="project-preview">
-          <div className="project-img-container">
-            <img
-              src="/src/assets/03a6acdf091c4972ac8bcc3e65d010de.jpg"
-              alt="img"
-            />
-          </div>
+                  <div className="project-profile">
+                    <Link to={`/profile/${psudoName}`}>
+                      <div className="cover-img">
+                        {userProfile ? (
+                          <img src={userProfile} alt={username} />
+                        ) : (
+                          <BsPersonCircle className="profile" />
+                        )}
+                      </div>
+                    </Link>
+                  </div>
 
-          <div className="project-info">
-            <div className="cover-img">
-              <img src="/src/assets/img-2.jpg" alt="" />
-            </div>
-
-            <div className="info">
-              <p className="project-desc">
-                Green plants are going to Extinct about 500 times faster...
-              </p>
-            </div>
-          </div>
-          <div className="more-info">
-            <div>
-              <h5>Greenpeace</h5>
-              <p>Jul 13, 2024 3 . weeks ago</p>
-            </div>
-
-            <button>Learn More</button>
-          </div>
-        </div>
-
-        <div className="project-preview">
-          <div className="project-img-container">
-            <img
-              src="/src/assets/03a6acdf091c4972ac8bcc3e65d010de.jpg"
-              alt="img"
-            />
-          </div>
-
-          <div className="project-info">
-            <div className="cover-img">
-              <img src="/src/assets/img-2.jpg" alt="" />
-            </div>
-
-            <div className="info">
-              <p className="project-desc">
-                Green plants are going to Extinct about 500 times faster...
-              </p>
-            </div>
-          </div>
-          <div className="more-info">
-            <div>
-              <h5>Greenpeace</h5>
-              <p>Jul 13, 2024 3 . weeks ago</p>
-            </div>
-
-            <button>Learn More</button>
-          </div>
-        </div>
-
-        <div className="project-preview">
-          <div className="project-img-container">
-            <img
-              src="/src/assets/03a6acdf091c4972ac8bcc3e65d010de.jpg"
-              alt="img"
-            />
-          </div>
-
-          <div className="project-info">
-            <div className="cover-img">
-              <img src="/src/assets/img-2.jpg" alt="" />
-            </div>
-
-            <div className="info">
-              <p className="project-desc">
-                Green plants are going to Extinct about 500 times faster...
-              </p>
-            </div>
-          </div>
-          <div className="more-info">
-            <div>
-              <h5>Greenpeace</h5>
-              <p>Jul 13, 2024 3 . weeks ago</p>
-            </div>
-
-            <button>Learn More</button>
-          </div>
-        </div>
-      </section>
+                  {/* Project description */}
+                  <div className="project-desc">
+                    <p className="project-title">{title}</p>
+                    <div className="project-user-info">
+                      <span className="project-creator">{username}</span>
+                      <span className="project-duration">
+                        {createdAt} . {relativeDuration}
+                      </span>
+                    </div>
+                  </div>
+                </section>
+              </div>
+            );
+          })}
+        </section>
+      )}
     </div>
   );
 };

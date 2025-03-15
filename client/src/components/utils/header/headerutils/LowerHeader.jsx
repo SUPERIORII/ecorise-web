@@ -6,7 +6,6 @@ import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { useAuthContext } from "../../../../context/AppContext";
 import CurrentUser from "./CurrentUser";
 
-
 const LowerHeader = ({ links, setLinks }) => {
   const [selected, setIsSelected] = useState(null);
   const [showMenu, setShowmenu] = useState(false);
@@ -16,7 +15,6 @@ const LowerHeader = ({ links, setLinks }) => {
   console.log(currentUser);
   // toogling the close and menu icons
   const displayIcon = () => {
-    
     setShowmenu(!showMenu);
   };
 
@@ -28,55 +26,56 @@ const LowerHeader = ({ links, setLinks }) => {
 
   return (
     <div className="lowerHeader">
-     
-      <section className="left-lower-header">
-        {showMenu ? (
-          <AiOutlineClose className="nav-close-icon" onClick={displayIcon} />
-        ) : (
-          <AiOutlineMenu className="nav-menu-icon" onClick={displayIcon} />
-        )}
+        {/* left lower header */}
+        <section className="left-lower-header">
+          {showMenu ? (
+            <AiOutlineClose className="nav-close-icon" onClick={displayIcon} />
+          ) : (
+            <AiOutlineMenu className="nav-menu-icon" onClick={displayIcon} />
+          )}
 
-        {/* ===============Logo=============  */}
+          {/* ===============Logo=============  */}
 
-        <div className="nav-left">
-          <img className="logo" src={logo} alt="Logo" />
-          <h3>EcoRise Global Initiatives</h3>
-        </div>
+          <div className="nav-left">
+            <img className="logo" src={logo} alt="Logo" />
+            <h3>EGI</h3>
+          </div>
 
-        {/* <div className="search-wrapper">
+          {/* <div className="search-wrapper">
           <FaSearch className="search-icon" />
         </div> */}
-      </section>
+        </section>
 
-      {/* ============MIDDLE LOWER HEADER================== */}
-      <section
-        className={
-          showMenu ? "middle-lower-header show" : "middle-lower-header"
-        }
-      >
-        {links.map((link) => {
-          return (
-            <div
-              className={
-                selected === link.id
-                  ? "tracker-wrapper active"
-                  : `tracker-wrapper`
-              }
-              key={link.id}
-            >
-              <Link to={link.linkUrl} onClick={() => getId(link.id)}>
-                <span>{link.linkName}</span>
-              </Link>
-              <div className="tracker"></div>
-            </div>
-          );
-        })}
-      </section>
+        {/* ============MIDDLE LOWER HEADER================== */}
+        <section
+          className={
+            showMenu ? "middle-lower-header show" : "middle-lower-header"
+          }
+        >
+          {links.map((link) => {
+            return (
+              <div
+                className={
+                  selected === link.id
+                    ? "tracker-wrapper active"
+                    : `tracker-wrapper`
+                }
+                key={link.id}
+              >
+                <Link to={link.linkUrl} onClick={() => getId(link.id)}>
+                  <span>{link.linkName}</span>
+                </Link>
+                <div className="tracker"></div>
+              </div>
+            );
+          })}
+        </section>
+    
 
       {/* =================right middle header===================== */}
       <section className="donate-btn-container">
         {currentUser ? (
-          <CurrentUser/>
+          <CurrentUser />
         ) : (
           <button className="donate-btn">Donate Now</button>
         )}
