@@ -1,5 +1,6 @@
 const db = require("../database");
 
+
 const users = (req, res) => {
   const data = req.user;
 
