@@ -1,12 +1,7 @@
-import React, {
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import customUrl from "../basedUrl";
-
+import { useQuery } from "@tanstack/react-query";
 
 const AuthContexProvider = createContext(null);
 
@@ -51,15 +46,17 @@ const AppContext = ({ children }) => {
   };
 
   //
-  useEffect(() => {
-    const fetchUser = () => {
-      customUrl.get("/api/user").then((response) => {
-        setCurrentUser(response.data);
-      });
-    };
-    fetchUser();
 
-  }, []);
+  useQuery({
+    queryKey: ["currentuser"],
+    queryFn: async () => {
+      const response = await customUrl.get("/api/user");
+      setCurrentUser(response.data);
+      return response.data;
+    },
+  });
+
+
 
   return (
     <AuthContexProvider.Provider

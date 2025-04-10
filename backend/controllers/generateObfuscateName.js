@@ -16,5 +16,3 @@ const obfuscateName = (length) => {
 };
 
 module.exports = obfuscateName;
-
-// obfuscateName(6);

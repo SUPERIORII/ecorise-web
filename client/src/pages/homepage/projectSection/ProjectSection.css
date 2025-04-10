@@ -4,30 +4,29 @@
   margin-top: 5rem;
 }
 
-.project-wrapper {
-  background-color: var(--background-100);
-  padding: 1em;
+.project-wp {
   display: grid;
   gap: 1rem;
 }
-
-.project-preview {
-  /* border: 1px solid red; */
+.project-container {
   background-color: white;
-  padding: 0.29rem;
-  border-radius: 30px;
+  padding: 1rem;
   box-shadow: var(--box-shadow);
-  cursor: pointer;
+  border-radius: 5px;
+  /* max-width: 700px; */
 }
 
-.project-img-container img {
+.project-img img {
   width: 100%;
-  border-radius: 30px;
+  cursor: pointer;
+  max-height: 300px;
+  object-fit: fill;
+  object-position: center;
 }
 
 .cover-img {
-  width: 45px;
-  height: 45px;
+  width: 50px;
+  height: 50px;
 }
 
 .cover-img img {
@@ -39,36 +38,40 @@
   cursor: pointer;
 }
 
-.project-info {
-  display: grid;
-  gap: 0.5rem;
-  grid-template-columns: 50px 1fr;
-  margin-top: 0.3rem;
-  padding: 0.5rem;
-}
-
-.info {
-  /* width: 100%; */
+.cover-img .profile {
+  width: 100%;
+  height: 100%;
+  color: rgba(0, 0, 0, 0.7);
 }
 
 .project-title {
-  font-size: 17px;
-  font-weight: bold;
-  margin-bottom: 5px;
+  font-size: 15px;
+  margin-bottom: 12px;
 }
 
-.project-user-info {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+.project-upper-section {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
 }
 
-
-
-
-.project-duration,.project-creator {
+.project-user-info .project-creator {
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 13px;
+}
+.project-user-info .project-creator span {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 700;
+}
+
+.project-user-info a {
+  color: black;
+  text-decoration: none;
+}
+
+.project-user-info .project-duration {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
   color: rgb(104, 104, 104);
 }
 
@@ -80,7 +83,7 @@
 }
 
 @media screen and (min-width: 475px) {
-  .project-wrapper {
+  .project-wp {
     grid-template-columns: 1fr;
   }
 
@@ -89,20 +92,8 @@
   } */
 }
 
-@media screen and (min-width: 768px) {
-  .project-wrapper {
+/* @media screen and (min-width: 768px) {
+  .project-wp {
     grid-template-columns: repeat(2, 1fr);
   }
-}
-
-@media screen and (min-width: 1024px) {
-  .project-wrapper {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media screen and (min-width: 1280px) {
-  .project-wrapper {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
+} */

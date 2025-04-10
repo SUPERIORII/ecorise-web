@@ -7,11 +7,23 @@ import {
   FaInstagram,
   FaLinkedin,
 } from "react-icons/fa";
+import { NavLink } from "react-router-dom";
 
-import { profilePictures } from "../../../sources";
+import { useQuery } from "@tanstack/react-query";
+import customUrl from "../../../basedUrl";
 
 const OurTeam = () => {
-  const [members, setMembers] = useState(profilePictures);
+  // fetching the user
+  const { isError, isLoading, data } = useQuery({
+    queryKey: ["members"],
+    queryFn: async () => {
+      const response = await customUrl.get("/api/members/latest");
+      return response.data;
+    },
+  });
+
+  console.log(data);
+
   return (
     <div>
       <Title title="our team" />
@@ -20,41 +32,46 @@ const OurTeam = () => {
       </p>
 
       <div className="our-team-container">
-        {members && members.length > 0 ? (
-          members.map((member) => {
-            const {id, name, img, rank} = member;
+        {isError ? (
+          "Error Ocurr fetching members. Please try again"
+        ) : isLoading ? (
+          "Loading our team please be patient..."
+        ) : data && data.length > 0 ? (
+          data.map((member) => {
+            const {
+              sociallink_id,
+              username,
+              user_profile,
+              facebook_Url,
+              instagram_Url,
+              whatsapp_Url,
+              rank,
+            } = member;
             return (
-              <div className="our-team-preview" key={id}>
+              <div className="our-team-preview" key={sociallink_id}>
                 <div className="member-wrapper">
-                  <img
-                    src={img}
-                    alt={name}
-                  />
+                  <img src={"/upload/" + user_profile} alt={username} />
 
                   <div className="social-control-container">
                     <div className="controls">
-                      <div className="facebook-btn">
+                      <NavLink to={facebook_Url} className="facebook-btn">
                         <FaFacebook className="fackbook-icon icons" />
-                      </div>
+                      </NavLink>
 
-                      <div className="whatsapp-btn">
+                      <NavLink to={whatsapp_Url} className="whatsapp-btn">
                         <FaWhatsapp className="whatsapp-icon icons" />
-                      </div>
+                      </NavLink>
 
-                      <div className="facebook-btn">
-                        <FaInstagram className="fackbook-icon icons" />
-                      </div>
-
-                      <div className="instagram-btn">
+                      <NavLink to={instagram_Url} className="instagram-btn">
                         <FaLinkedin className="instagram-icon icons" />
-                      </div>
+                      </NavLink>
                     </div>
                   </div>
                 </div>
 
                 <div className="member-info">
-                  <h4>{name}</h4>
-                  <span>{rank}</span>
+                  <h4>{username}</h4>
+                  <span>Rank</span>
                 </div>
               </div>
             );

@@ -3,7 +3,15 @@ GET http://localhost:3000/api/user
 
 ###
 
-GET http://localhost:3000/api/user/find/adama12_h_ayxn
+POST http://localhost:3000/api/user
+Content-Type: application/json
+
+{
+   "profile": "abraham"
+}
+###
+
+GET http://localhost:3000/api/user/find/abraham_OvYeo5
 
 
 ###
@@ -14,16 +22,24 @@ Content-Type: application/json
 ###
 GET  http://localhost:3000/api/news/fetch-news
 Content-Type: application/json
+###
+POST  http://localhost:3000/api/upload
+Content-Type: application/json
 
+
+{
+   "file": "../src/assets/03a6acdf091c4972ac8bcc3e65d010de.jpg"
+}
 
 ###
 POST http://localhost:3000/api/news/add-news
 Content-Type: application/json
 
 {
-   "title": "Green plant is a great way to experiement the future",
-   "description": "this is green plant discription",
-   "newsImg": "../src/assets/profilePictures/img-1.jpg"
+   "title": "second News Title",
+   "description": "Environment cleaning description",
+   "category": "Environment",
+   "newsImg": "../src/assets/91925a99b7054ef8c69f04d4e05d488d.jpg"
 }
 ###
 GET http://localhost:3000/projects/fetchProject
@@ -34,9 +50,9 @@ POST http://localhost:3000/projects/addProject
 Content-Type: application/json
 
 {
-   "title": "first project title",
-   "description": "eeeeeeeeekeowoi euieinreo eorewon eeone lwl",
-   "projectImg": "../src/assets/profilePictures/img-7.jpg"
+   "title": "this is a great project for environemt",
+   "description": "eeeeeeeeekeowoi euieinreo eorewon eeone hhh",
+   "projectImg": "../src/assets/img-2.jpg"
 }
 
 ###
@@ -51,7 +67,9 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:3000/
+GET http://localhost:3000/api/members/latest
+###
+GET http://localhost:3000/api/links
 
 
 
@@ -69,3 +87,11 @@ Content-Type: application/json
 POST http://localhost:3000/api/auth/logout
 Content-Type: application/json
  
+###
+POST http://localhost:3000/upload
+Content-Type: application/json
+ 
+
+ {
+   "profile" : "../src/assets/03a6acdf091c4972ac8bcc3e65d010de.jpg"
+ }

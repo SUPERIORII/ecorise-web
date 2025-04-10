@@ -8,4 +8,5 @@ export { default as HomeLayout } from "./HomeLayout";
 export { default as PageNotFound } from "./PageNotFound";
 export { default as LandingSkeleton } from "../components/utils/skeleton/LandingSkeleton";
 export {default as Profile} from "../pages/profile/Profile"
-
+export {default as EditProfile} from "../pages/EditProfile"
+export {default as Admin} from "../pages/Admin"

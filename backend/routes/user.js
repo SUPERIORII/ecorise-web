@@ -1,14 +1,12 @@
-const express = require("express")
-const { users, getUser } = require("../controllers/users")
-const { isAuthenticated } = require("../controllers/isAuthenticated")
-const router = express.Router()
-const cookieParser = require("cookie-parser")
+const express = require("express");
+const { users, getUser, updateProfile } = require("../controllers/users");
+const router = express.Router();
+const cookieParser = require("cookie-parser");
 
-router.use(cookieParser())
+router.use(cookieParser());
 
+router.get("/user", users);
+router.get("/user/find/:psudoname", getUser);
+router.patch("/user", updateProfile);
 
-router.get("/user", isAuthenticated, users)
-router.get("/user/find/:psudoname", getUser)
-
-
-module.exports = router
+module.exports = router;

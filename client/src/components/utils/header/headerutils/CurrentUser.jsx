@@ -1,24 +1,35 @@
 import React, { useEffect, useRef } from "react";
 import { useAuthContext } from "../../../../context/AppContext";
 import styled from "styled-components";
-import { FaBell, FaChevronDown } from "react-icons/fa";
-import { AiOutlineLogout } from "react-icons/ai";
+import { FaBell, FaChevronDown, FaMailBulk } from "react-icons/fa";
+import {
+  AiOutlineMail,
+  AiOutlineFacebook,
+  AiOutlineWhatsApp,
+  AiOutlineInstagram,
+  AiOutlineBell,
+} from "react-icons/ai";
+import { FaSearch } from "react-icons/fa";
 
-import { BsPersonFill, Bs0Circle, BsPersonCircle } from "react-icons/bs";
+import { BsPersonFill } from "react-icons/bs";
 import { ToastContainer } from "react-toastify";
-import { Link, Navigate, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import {
+  Link,
+  Navigate,
+  useLocation,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
 
 const Wrapper = styled.section`
   max-width: 1000px;
   padding: 0.5rem;
   width: 100%;
-  /* background-color: lightblue; */
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 1.5rem;
+  /* background-color: lightblue; */
   font-weight: 700;
-  position: relative;
 
   .userProfile {
     width: 2.5rem;
@@ -26,13 +37,13 @@ const Wrapper = styled.section`
     border-radius: 50%;
   }
 
-  .bell-icon {
+  /* .bell-icon {
     font-size: 23px;
     margin-right: 20px;
-  }
+  } */
 
   .icon {
-    font-size: 2px;
+    font-size: 25px;
   }
 
   .moreInfo {
@@ -96,13 +107,18 @@ const Wrapper = styled.section`
   .moreInfoProfile {
     position: absolute;
     /* left: 0%; */
-    right: 0%;
+    right: -10px;
     top: 20%;
     transform: translateY(30%);
-    width: 150%;
+    width: 300px;
     background-color: var(--background-100);
     padding: 0.9rem;
     transition: 20s ease-in-out;
+  }
+
+  .notifications {
+    position: absolute;
+    left: 0;
   }
 
   .currentUserWrapper {
@@ -119,6 +135,28 @@ const Wrapper = styled.section`
 
   .currentUserWrapper:hover {
     opacity: 0.9;
+  }
+
+  .notification-wrapper {
+    position: relative;
+    cursor: pointer;
+  }
+
+  .notification-wrapper span {
+    /* position: absolute; */
+    /* top: 2px;
+    right: 5px;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    width: 13px;
+    height: 13px;
+    margin: 0 auto;
+    border: 2px solid white; */
+  }
+
+  .notification {
+    position: absolute;
   }
 `;
 
@@ -142,6 +180,7 @@ const CurrentUserPorfile = styled.div`
 const CurrentUser = () => {
   const { currentUser, useToggle, toggleState, setToggleState, logOut } =
     useAuthContext();
+  const psudoName = currentUser.shadowname;
 
   const navigate = useNavigate();
   const toggleRef = useRef(null);
@@ -172,55 +211,62 @@ const CurrentUser = () => {
     }
   };
 
-  console.log(currentUser);
-
   return (
     <Wrapper>
       <ToastContainer position="top-center" />
-      <FaBell className="bell-icon" />
-      <FaBell className="bell-icon" />
-      <FaBell className="bell-icon" />
+
+      <div className="notification-wrapper">
+        <span></span>
+        {/* 
+        <section className="notification" ref={toggleRef}>
+          <Link to={`/profile/${psudoName}`}>
+            <div className="currentUserWrapper">
+              <img
+                className="userProfile"
+                src={"/upload/" + user_profile}
+                alt="user"
+              />
+
+              <span>{username.toUpperCase()}</span>
+            </div>
+          </Link>
+
+          <div className="account" onClick={handleLogOut}>
+            <AiOutlineLogout className="icon" />
+            <span>Logout</span>
+          </div>
+        </section> */}
+      </div>
+
       <div className="profile-container" onClick={useToggle}>
-        {!user_profile ? (
-          <CurrentUserPorfile>
-            <BsPersonCircle className="profile" />
-          </CurrentUserPorfile>
-        ) : (
-          <img className="userProfile" src={user_profile} alt="user" />
-        )}
+        <img
+          className="userProfile"
+          src={"/upload/" + user_profile}
+          alt="user"
+        />
 
         <div className="chevot">
           <FaChevronDown className="dropdown-icon" />
         </div>
-      </div>
 
-      <div>
-        {/* Showing the user more information about themselve */}
-        {toggleState && (
-          <section className="moreInfoProfile" ref={toggleRef}>
+        {/* <section className="moreInfoProfile" ref={toggleRef}>
+          <Link to={`/profile/${psudoName}`}>
             <div className="currentUserWrapper">
-              {!user_profile ? (
-                <CurrentUserPorfile>
-                  <BsPersonCircle className="profile" />
-                </CurrentUserPorfile>
-              ) : (
-                <img className="userProfile" src={user_profile} alt="user" />
-              )}
+              <img
+                className="userProfile"
+                src={"/upload/" + user_profile}
+                alt="user"
+              />
 
               <span>{username.toUpperCase()}</span>
             </div>
+          </Link>
 
-            <div className="account">
-              <BsPersonFill className="icon" />
-              <span>Account</span>
-            </div>
-
-            <div className="account" onClick={handleLogOut}>
-              <AiOutlineLogout className="icon" />
-              <span>Logout</span>
-            </div>
-          </section>
-        )}
+          <div className="account" onClick={handleLogOut}>
+            <AiOutlineLogout className="icon" />
+            <span>Logout</span>
+          </div>
+        </section> */}
       </div>
     </Wrapper>
   );

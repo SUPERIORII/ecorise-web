@@ -62,7 +62,8 @@ const Login = () => {
             </div>
           </section>
 
-          <LoginBtn inputs={inputs} />
+         
+          <LoginBtn inputs={inputs}/>
         </FormWrapper>
       </form>
     </ButtonWrapper>

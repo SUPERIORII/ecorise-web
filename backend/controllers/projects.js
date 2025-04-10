@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const db = require("../database");
-const moment = require("moment")
+const moment = require("moment");
 
 const fetchProjects = (req, res) => {
   const projects = { result: [] };
@@ -16,7 +16,7 @@ const fetchProjects = (req, res) => {
         title: project.title,
         description: project.description,
         projectImg: project.project_img,
-        createdAt: moment(project.created_date).format("MMMM D, YYYY"),
+        createdAt: moment(project.created_date).format("D MMMM"),
         relativeDuration: moment(project.created_date).fromNow(),
         userId: project.user_id,
         username: project.username,
@@ -25,14 +25,14 @@ const fetchProjects = (req, res) => {
         userRole: project.user_role,
       };
 
-      projects.result.push(info)
+      projects.result.push(info);
     });
 
     res.json(projects);
   });
 };
 
-const postProjects = (req, res) => {
+const addProjects = (req, res) => {
   const token = req.cookies.infoToken;
   const { title, description, projectImg } = req.body;
 
@@ -63,62 +63,8 @@ const postProjects = (req, res) => {
           res.status(200).json("project upload has been success");
         }
       );
-
     });
-
-    
   });
 };
 
-// const postProjects = (req, res) => {
-//   const token = req.cookies.infoToken
-//   const { title , description, userId, newImg} = req.body;
-
-//  jwt.verify(token, process.env.SECRET, (err, userInfo) => {
-//    if (err) return res.status(401).json("Not Login in!!");
-
-//    const query = "SELECT * FROM users WHERE id =?";
-
-//    res.json(body);
-
-//   //  db.query(query, [adminInfo.userId], (err, result) => {
-//   //    if (err) return res.status(500).json(err.message);
-
-//   //    // // check if user role is not super admin to not register new user
-//   //   //  if (adminRole === "admin") {
-//   //   //    res
-//   //   //      .status(403)
-//   //   //      .json(
-//   //   //        "Access denied!! You do not have permission to register users!!"
-//   //   //      );
-//   //   //    return;
-//   //   //  }
-
-//   //   //  // check if user role is super admin to register new user
-//   //   //  if (adminRole === "super admin") {
-//   //   //    // check if the new user email is register
-
-//   //   //    const query = "SELECT * FROM users WHERE email=?";
-//   //   //    db.query(query, [email], (err, result) => {
-//   //   //      if (err) return res.status(500).json(err);
-
-//   //   //      if (result.length)
-//   //   //        return res.status(409).json("Account already exist!!");
-
-//   //   //      // register the new admin user
-//   //   //      const query =
-//   //   //        "INSERT INTO users(username, email, password, user_role) VALUE(?,?,?,?)";
-//   //   //      db.query(query, [username, email, hashPassword, role], (err) => {
-//   //   //        if (err) return res.status(500).json(err);
-
-//   //   //        res.status(200).json("New Admin has been created");
-//   //   //      });
-//   //   //    });
-//   //   //  }
-
-//   //  });
-
-// });
-// };
-
-module.exports = { fetchProjects, postProjects };
+module.exports = { fetchProjects, addProjects };

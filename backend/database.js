@@ -91,12 +91,14 @@ const createTables = () => {
     id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
     description VARCHAR(255),
+    category TEXT,
     user_id INT,
     created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     news_img VARCHAR(255) NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id)
     )
   `;
+  
   db.query(newsTableQuery, function (err) {
     if (err) {
       console.log("error creating News table:", err.message);
@@ -128,13 +130,14 @@ const createTables = () => {
   const socialLinksTableQuery = ` 
   CREATE TABLE IF NOT EXISTS social_links(
     id INT AUTO_INCREMENT PRIMARY KEY,
-    facebook_link VARCHAR(255),
-    whatsApp_link VARCHAR(255),
-    instagram_link VARCHAR(255),
-    member_id INT,
-    FOREIGN KEY (member_id) REFERENCES members(id)
+    facebook_Url VARCHAR(255),
+    whatsapp_Url VARCHAR(255),
+    instagram_Url VARCHAR(255),
+    user_id INT,
+    FOREIGN KEY (user_id) REFERENCES users(id)
     )
   `;
+
   db.query(socialLinksTableQuery, function (err) {
     if (err) {
       console.log("error creating Social Links table:", err.message);
@@ -142,6 +145,25 @@ const createTables = () => {
     }
 
     console.log("Social Links table created successfully");
+  });
+
+  //member table query
+  const menuLinksTableQuery = ` 
+  CREATE TABLE IF NOT EXISTS menu_links(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(30),
+    link VARCHAR(30),
+    icon VARCHAR(30)
+    )
+  `;
+
+  db.query(menuLinksTableQuery, function (err) {
+    if (err) {
+      console.log("error creating Menu Links table:", err.message);
+      return;
+    }
+
+    console.log("Menu Links table created successfully");
   });
 };
 
@@ -151,6 +173,5 @@ createTables();
 //   if (err) return console.log(err.message);
 //   console.log("database is drop");
 // });
-
 
 module.exports = db;

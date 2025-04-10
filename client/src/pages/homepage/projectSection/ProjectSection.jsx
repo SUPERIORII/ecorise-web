@@ -4,7 +4,7 @@ import Title from "../../../components/utils/title/Title";
 import { useQuery } from "@tanstack/react-query";
 import customUrl from "../../../basedUrl";
 import LandingSkeleton from "../../../components/utils/skeleton/LandingSkeleton";
-import { BsPerson, BsPersonCircle } from "react-icons/bs";
+import { BsPersonCircle } from "react-icons/bs";
 import { Link } from "react-router-dom";
 
 const ProjectSection = () => {
@@ -16,8 +16,6 @@ const ProjectSection = () => {
     },
   });
 
-  
-
   return (
     <div className="ergi-project-container">
       <Title title="Our Projects" />
@@ -27,7 +25,7 @@ const ProjectSection = () => {
       ) : isLoading ? (
         <LandingSkeleton />
       ) : (
-        <section className="project-wrapper">
+        <section className="project-wp">
           {data.result.map((project) => {
             const {
               projectId,
@@ -45,37 +43,46 @@ const ProjectSection = () => {
             console.log(project);
 
             return (
-              <div className="project-preview" key={projectId}>
-                <div className="project-img-container">
-                  <img src={projectImg} alt="img" />
-                </div>
-
+              <div className="project-container" key={projectId}>
                 {/* project profile picture */}
                 <section className="project-info">
-
-                  <div className="project-profile">
+                  <div className="project-upper-section">
                     <Link to={`/profile/${psudoName}`}>
                       <div className="cover-img">
                         {userProfile ? (
-                          <img src={userProfile} alt={username} />
+                          <img
+                            src={"../public/upload/" + userProfile}
+                            alt={username}
+                          />
                         ) : (
                           <BsPersonCircle className="profile" />
                         )}
                       </div>
                     </Link>
+
+                    <div className="project-description">
+                      <div className="project-user-info">
+                        <Link to={`/profile/${psudoName}`}>
+                          <p className="project-creator">
+                            <span>{username}</span> created a new Project
+                          </p>
+                        </Link>
+                        <span className="project-duration">
+                          {" "}
+                          {createdAt} . {relativeDuration}
+                        </span>
+                      </div>
+                    </div>
                   </div>
 
                   {/* Project description */}
-                  <div className="project-desc">
-                    <p className="project-title">{title}</p>
-                    <div className="project-user-info">
-                      <span className="project-creator">{username}</span>
-                      <span className="project-duration">
-                        {createdAt} . {relativeDuration}
-                      </span>
-                    </div>
-                  </div>
+                  <p className="project-title">{title}</p>
                 </section>
+
+                {/* image */}
+                <div className="project-img">
+                  <img src={projectImg} alt="img" />
+                </div>
               </div>
             );
           })}

@@ -8,16 +8,7 @@ import {
   Resources,
 } from "../homepage/index";
 
-
-
-
 const Home = () => {
-  // const result =
-  //   "abraham".charAt(0).toUpperCase() + result.slice(1).toLowerCase();
-  // // const value = result
-
-  // console.log(result);
-  
   return (
     <>
       <HeroSection />

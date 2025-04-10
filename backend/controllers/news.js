@@ -6,28 +6,32 @@ const moment = require("moment");
 // uploading news
 const addNews = (req, res) => {
   const token = req.cookies.infoToken;
-  const { title, description, newsImg } = req.body;
+  const { title, description,category, newsImg } = req.body;
+
+//  res.json(req.body);
+  
 
   jwt.verify(token, process.env.SECRET, (err, userInfo) => {
     if (err) return res.status(401).json("Session Expired!!");
 
     // checking if the project image is empty before storing the project in the database
-    if (!newsImg) return res.status(400).json("Project image cannot be empty!");
+    if (!newsImg)
+      return res.status(400).json("New field image cannot be empty!");
 
     // check if news exist in the database
     const query = "SELECT * FROM news WHERE title=? || news_img=?";
     db.query(query, [title, newsImg], (err, result) => {
-      if (err) return res.status(500).json(err.message);
+      if (err) return res.status(500).json(err);
 
       if (result.length || result.length > 0)
-        return res.status(400).json("project already exist");
+        return res.status(400).json("news already exist");
 
       // Store the project information in the database if all requirement is met
       const query =
-        "INSERT INTO news(title,description, user_id, news_img ) VALUE(?,?,?,?)";
+        "INSERT INTO news(title,description, category, user_id, news_img ) VALUE(?,?,?,?,?)";
       db.query(
         query,
-        [title, description, userInfo.userId, newsImg],
+        [title, description, category, userInfo.userId, newsImg],
         (err, result) => {
           if (err) return res.status(500).json(err.message);
 
@@ -59,7 +63,6 @@ const fetchLatestNews = (req, res) => {
       };
 
       latestNews.result.push(info);
-      
     });
     res.status(200).json(latestNews.result);
   });
@@ -67,8 +70,7 @@ const fetchLatestNews = (req, res) => {
 
 const fetchnews = (req, res) => {
   const news = { result: [] };
-  const query =
-    "SELECT * FROM news ORDER BY created_date DESC LIMIT ? OFFSET 1";
+  const query = "SELECT * FROM news ORDER BY created_date DESC LIMIT ?";
 
   db.query(query, [1000], (err, result) => {
     if (err) return res.status(500).json(err.message);
@@ -78,7 +80,7 @@ const fetchnews = (req, res) => {
         newsId: allNews.id,
         title: allNews.title,
         description: allNews.description,
-        // userId: news.user_id,
+        category: allNews.category,
         createdDate: moment(allNews.created_date).format("MMMM D, YYYY"),
         relativeTime: moment(allNews.created_date).fromNow(),
         newsTime: moment(allNews.created_date).format("hh:mm"),
