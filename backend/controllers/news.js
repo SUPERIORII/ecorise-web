@@ -1,4 +1,3 @@
-const { json } = require("body-parser");
 const db = require("../database");
 const jwt = require("jsonwebtoken");
 const moment = require("moment");
@@ -47,7 +46,7 @@ const fetchLatestNews = (req, res) => {
   const latestNews = { result: [] };
   const query = "SELECT * FROM news ORDER BY created_date DESC LIMIT ?";
 
-  db.query(query, [1], (err, result) => {
+  db.query(query, [2], (err, result) => {
     if (err) return res.status(500).json(err.message);
 
     result.map((news) => {
@@ -70,9 +69,9 @@ const fetchLatestNews = (req, res) => {
 
 const fetchnews = (req, res) => {
   const news = { result: [] };
-  const query = "SELECT * FROM news ORDER BY created_date DESC LIMIT ?";
+  const query = "SELECT * FROM news ORDER BY created_date DESC";
 
-  db.query(query, [1000], (err, result) => {
+  db.query(query, (err, result) => {
     if (err) return res.status(500).json(err.message);
 
     result.map((allNews) => {

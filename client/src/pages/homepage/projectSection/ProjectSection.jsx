@@ -11,7 +11,7 @@ const ProjectSection = () => {
   const { isError, isLoading, data } = useQuery({
     queryKey: ["getPost"],
     queryFn: async () => {
-      const response = await customUrl.get("/projects/fetchProject");
+      const response = await customUrl.get("/api/projects/fetchProject");
       return response.data;
     },
   });
@@ -39,8 +39,6 @@ const ProjectSection = () => {
               relativeDuration,
               title,
             } = project;
-
-            console.log(project);
 
             return (
               <div className="project-container" key={projectId}>

@@ -8,7 +8,6 @@ const AuthContexProvider = createContext(null);
 const AppContext = ({ children }) => {
   const [toggleState, setToggleState] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
-  // const toggleRef = useRef(null)
 
   //checking the user cerdentials again the system
   const login = async (input) => {

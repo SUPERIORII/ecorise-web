@@ -22,7 +22,6 @@ const OurTeam = () => {
     },
   });
 
-  console.log(data);
 
   return (
     <div>

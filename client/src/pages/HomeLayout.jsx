@@ -14,7 +14,7 @@ const LayoutWrapper = styled.main`
   }
   @media screen and (min-width: 1024px) {
     margin-left: 240px;
-    margin-right: 300px;
+    margin-right: 400px;
   }
 `;
 

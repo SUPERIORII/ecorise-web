@@ -10,3 +10,4 @@ export { default as LandingSkeleton } from "../components/utils/skeleton/Landing
 export {default as Profile} from "../pages/profile/Profile"
 export {default as EditProfile} from "../pages/EditProfile"
 export {default as Admin} from "../pages/Admin"
+export {default as Video} from "../pages/Video"

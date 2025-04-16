@@ -14,6 +14,7 @@ import {
   Profile,
   EditProfile,
   Admin,
+  Video
 } from "../src/pages";
 
 import { Login, Register } from "./Authentications/index";
@@ -31,7 +32,6 @@ const router = createBrowserRouter([
     element: <HomeLayout />,
     children: [
       { index: true, element: <Homepage /> },
-      { path: "what-we-do", element: <Homepage /> },
       { path: "about-us", element: <AboutUs /> },
       { path: "get-involved", element: <GetInvolve /> },
       { path: "news", element: <News /> },
@@ -42,6 +42,7 @@ const router = createBrowserRouter([
     ],
   },
   { path: "/admin", element: <Admin /> },
+  {path: "/video", element: <Video /> },
   { path: "/login", element: <Login /> },
   { path: "/register", element: <Register /> },
   { path: "/skeleton", element: <LeftHomeNewSkeleton /> },

@@ -13,29 +13,29 @@ import styled from "styled-components";
 import customUrl from "../../../basedUrl";
 import MiniTitle from "../title/MiniTitle";
 import { useAuthContext } from "../../../context/AppContext";
-import classNames from "classnames";
 
 const Leftbar = styled.aside`
   position: fixed;
   height: 100%;
   top: 15%;
   width: 200px;
-  /* transform: translateX(-300px); */
   left: -300px;
+  transition: 0.5s ease-in-out;
+
   background-color: white;
   border-right: 1px solid var(--white-300);
   padding: 1rem;
-  transition: 0.5s ease-in-out;
+  z-index: 3000;
 
   &.show {
-    opacity: 1;
     left: 0px;
-    margin: 0;
+    visibility: visible;
   }
 
   @media screen and (min-width: 1024px) {
     left: 0px;
-
+    opacity: 1;
+    visibility: visible;
   }
   .nav-menu-wrapper {
     margin-top: 20px;
@@ -74,7 +74,6 @@ const LeftSidebar = () => {
   const { toggleState, setToggleState } = useAuthContext();
   const sideBarWidth = useRef(null);
 
-  console.log(toggleState);
 
   const Icons = {
     BiHome: <BiHome />,
@@ -116,18 +115,6 @@ const LeftSidebar = () => {
                   </div>
                 );
               })}
-          {/* 
-      
-
-          <NavLink className="nav-menu" to="/about-us">
-            <BiAbacus className="icon" />
-            <span>About Us</span>
-          </NavLink>
-
-          <NavLink className="nav-menu" to="get-involved">
-            <BiBroadcast className="icon" />
-            <span>Get Involved</span>
-          </NavLink> */}
         </div>
       </div>
     </Leftbar>

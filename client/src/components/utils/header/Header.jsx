@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { LowerHeader } from "./headerutils/index";
 import LeftHeader from "./LeftHeader";
 import MiddleHeader from "./MiddleHeader";
 import RightHeader from "./RightHeader";
@@ -14,7 +13,7 @@ const Wrapper = styled.header`
   left: 0;
   right: 0;
   background-color: var(--white-100);
-  z-index: 100;
+  z-index: 2000;
 
   display: flex;
   justify-content: space-between;

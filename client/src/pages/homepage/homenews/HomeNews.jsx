@@ -24,7 +24,6 @@ const HomeNews = () => {
     },
   });
 
-  console.log(allNews.data);
 
   return (
     <div className="news-ergi-container">

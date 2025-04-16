@@ -2,6 +2,7 @@ import React from "react";
 import "./Introduction.css";
 import { FaPlay } from "react-icons/fa";
 import Title from "../../../components/utils/title/Title";
+import { Link } from "react-router-dom";
 
 
 const Introduction = () => {
@@ -37,9 +38,11 @@ const Introduction = () => {
 
           <div className="intro-btn">
             <button className="learn-more-btn">Learn More</button>
+            <Link to="/video">
             <div className="how-it-work-play-icon">
               <FaPlay className="play-btn" />
             </div>
+            </Link>
             <span className="how-it-work">How We works</span>
           </div>
         </div>

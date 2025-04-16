@@ -32,6 +32,15 @@ const fetchProjects = (req, res) => {
   });
 };
 
+const latestProjects = (req, res) => {
+  const query = "SELECT * FROM project ORDER BY created_date DESC LIMIT ?";
+
+  db.query(query, [2], (err, result) => {
+    if (err) return res.status(500).json(err);
+    res.status(200).json(result);
+  });
+};
+
 const addProjects = (req, res) => {
   const token = req.cookies.infoToken;
   const { title, description, projectImg } = req.body;
@@ -67,4 +76,4 @@ const addProjects = (req, res) => {
   });
 };
 
-module.exports = { fetchProjects, addProjects };
+module.exports = { fetchProjects, addProjects, latestProjects };

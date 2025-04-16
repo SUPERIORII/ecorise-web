@@ -6,6 +6,7 @@ import styled from "styled-components";
 import Notification from "./RightHeaderUtils/Notification";
 import Email from "./RightHeaderUtils/Email";
 import DonateBtn from "./RightHeaderUtils/DonateBtn";
+import { useAuthContext } from "../../../context/AppContext";
 
 const RightWrapper = styled.div`
   display: flex;
@@ -20,6 +21,10 @@ const RightWrapper = styled.div`
 `;
 
 const RightHeader = () => {
+  const { currentUser } = useAuthContext();
+
+  console.log(currentUser);
+
   const [dropDown, setDropDown] = useState({
     notification: false,
     email: false,
@@ -28,25 +33,30 @@ const RightHeader = () => {
   const handleDropDown = (type) => {
     setDropDown((prev) => ({ ...prev, [type]: !prev[type] }));
   };
-  
 
   return (
     <RightWrapper>
       <div className="social-icons">
         <FaSearch className="extra search-icon" />
-        <Email
-          handleDropDown={handleDropDown}
-          dropDown={dropDown}
-          setDropDown={setDropDown}
-        />
-        <AiOutlineFacebook className="extra" />
 
-        <AiOutlineWhatsApp className="extra" />
-        <Notification
-          handleDropDown={handleDropDown}
-          dropDown={dropDown}
-          setDropDown={setDropDown}
-        />
+        {currentUser ? (
+          <Notification
+            handleDropDown={handleDropDown}
+            dropDown={dropDown}
+            setDropDown={setDropDown}
+          />
+        ) : (
+          <>
+            <Email
+              handleDropDown={handleDropDown}
+              dropDown={dropDown}
+              setDropDown={setDropDown}
+            />
+            <AiOutlineFacebook className="extra" />
+
+            <AiOutlineWhatsApp className="extra" />
+          </>
+        )}
       </div>
       {/* <CurrentUser /> */}
       <DonateBtn />

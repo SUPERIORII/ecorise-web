@@ -1,6 +1,16 @@
 
-GET http://localhost:3000/api/user
+GET http://localhost:3000/item?item=10&page=2
 
+###
+
+POST http://localhost:3000/api/upload
+# Content-Type: application/json
+Content-Type: 
+
+
+{
+   "image": "../src/assets/logo.png"
+}
 ###
 
 POST http://localhost:3000/api/user
@@ -41,12 +51,16 @@ Content-Type: application/json
    "category": "Environment",
    "newsImg": "../src/assets/91925a99b7054ef8c69f04d4e05d488d.jpg"
 }
+
 ###
-GET http://localhost:3000/projects/fetchProject
+GET http://localhost:3000/api/projects/fetchProject
+Content-Type: application/json
+###
+GET http://localhost:3000/api/projects/latest-projects
 Content-Type: application/json
 ###
 
-POST http://localhost:3000/projects/addProject
+POST http://localhost:3000/api/projects/addProject
 Content-Type: application/json
 
 {
