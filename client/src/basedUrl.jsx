@@ -1,9 +1,9 @@
 import axios from "axios";
 
 const customUrl = axios.create({
-    baseURL: "http://localhost:3000",
-    withCredentials: true,
-})
+  baseURL: "https://ecorise-global-initiative.onrender.com",
+  // baseURL: "http://localhost:3000",
+  withCredentials: true,
+});
 
-
-export default customUrl
+export default customUrl;
