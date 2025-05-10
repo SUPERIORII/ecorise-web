@@ -1,5 +1,4 @@
 .ergi-project-container {
-  /* max-width: 1200px; */
   width: 100%;
   margin-top: 5rem;
 }
@@ -7,21 +6,24 @@
 .project-wp {
   display: grid;
   gap: 1rem;
+  grid-template-columns: repeat(3, 1fr);
 }
 .project-container {
   background-color: white;
   padding: 1rem;
   box-shadow: var(--box-shadow);
-  border-radius: 5px;
+  border-radius: 15px;
+
   /* max-width: 700px; */
 }
 
 .project-img img {
+  aspect-ratio: 16/11;
   width: 100%;
   cursor: pointer;
-  max-height: 300px;
-  object-fit: fill;
-  object-position: center;
+  /* max-height: 300px; */
+  /* object-fit: fill;
+  object-position: center; */
 }
 
 .cover-img {
@@ -82,7 +84,7 @@
   border-radius: var(--rounded-radius-20);
 }
 
-@media screen and (min-width: 475px) {
+@media screen and (min-width: 275px) {
   .project-wp {
     grid-template-columns: 1fr;
   }
@@ -92,8 +94,8 @@
   } */
 }
 
-/* @media screen and (min-width: 768px) {
+@media screen and (min-width: 768px) {
   .project-wp {
     grid-template-columns: repeat(2, 1fr);
   }
-} */
+}

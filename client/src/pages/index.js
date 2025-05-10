@@ -11,3 +11,4 @@ export {default as Profile} from "../pages/profile/Profile"
 export {default as EditProfile} from "../pages/EditProfile"
 export {default as Admin} from "../pages/Admin"
 export {default as Video} from "../pages/Video"
+export { default as DetailPage } from "../pages/DetailPage";

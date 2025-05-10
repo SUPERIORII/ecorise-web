@@ -49,8 +49,17 @@ const OurTeam = () => {
             return (
               <div className="our-team-preview" key={sociallink_id}>
                 <div className="member-wrapper">
-                  <img src={"/upload/" + user_profile} alt={username} />
+                  <img
+                    src="/src/assets/03a6acdf091c4972ac8bcc3e65d010de.jpg"
+                    alt={username}
+                  />
 
+                </div>
+
+                <div className="member-info">
+                  <h4>{username}</h4>
+                  <span>Rank</span>
+                </div>
                   <div className="social-control-container">
                     <div className="controls">
                       <NavLink to={facebook_Url} className="facebook-btn">
@@ -66,12 +75,6 @@ const OurTeam = () => {
                       </NavLink>
                     </div>
                   </div>
-                </div>
-
-                <div className="member-info">
-                  <h4>{username}</h4>
-                  <span>Rank</span>
-                </div>
               </div>
             );
           })

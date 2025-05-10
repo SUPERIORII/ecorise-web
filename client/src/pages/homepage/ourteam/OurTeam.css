@@ -12,14 +12,18 @@
 
 .our-team-container {
   display: grid;
-  /* align-items: flex-start; */
   gap: 0.5rem;
+  grid-template-columns: repeat(3, 1fr);
   /* padding: 2rem; */
-  width: 100%;
+  /* width: 100%; */
 }
 
 .our-team-preview {
   cursor: pointer;
+  margin-bottom: 20px;
+  max-width: 300px;
+  padding: 1rem;
+  /* margin: 0 auto; */
 }
 
 .member-wrapper {
@@ -27,34 +31,30 @@
 }
 
 .member-wrapper img {
-  width: 100%;
-  height: 100%;
+  /* transform: translateX(10%); */
+  margin-inline: auto;
+  width: 200px;
+  height: 200px;
+  /* aspect-ratio: 7/5; */
+  object-position: 90% 30%;
   object-fit: cover;
-  border-top-left-radius: 70px;
-  border-bottom-right-radius: 70px;
-  border-bottom-left-radius: 20px;
-  border-top-right-radius: 20px;
+  border-radius: 50%;
 }
 
 .social-control-container {
-  position: absolute;
+  /* position: absolute; */
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: rgba(0, 0, 0, 0.7);
+  /* background-color: rgba(0, 0, 0, 0.7); */
 
-  border-top-left-radius: 70px;
-  border-bottom-right-radius: 70px;
-  border-bottom-left-radius: 20px;
-  border-top-right-radius: 20px;
-
-  opacity: 0;
+  /* opacity: 0; */
   transition: opacity 0.5s ease-in-out;
 }
 
 .controls {
-  position: absolute;
+  /* position: absolute; */
   bottom: 0;
   padding: 0.5rem;
 
@@ -65,23 +65,13 @@
 }
 
 .icons {
-  color: white;
-  width: 30px;
-  height: 30px;
+  color: var(--color-primary);
+  font-size: 25px;
   cursor: pointer;
 }
 
 .our-team-preview:hover .social-control-container {
   opacity: 1;
-}
-
-.controls > a {
-  background: none;
-  border: 3px solid white;
-  padding: 0.4rem;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
 }
 
 .member-info {
@@ -90,18 +80,18 @@
 }
 
 .member-info h4 {
-  font-size: 1.5rem;
+  font-size: clamp(14px, 3vw, 16px);
 }
 .member-info span {
-  font-size: 1.3rem;
+  font-size: clamp(18px, 3vw, 24px);
 }
 
-@media screen and (min-width: 475px) {
+/* @media screen and (min-width: 275px) {
   .our-team-container {
     grid-template-columns: 1fr;
   }
-}
-
+} */
+/* 
 @media screen and (min-width: 768px) {
   .our-team-container {
     grid-template-columns: repeat(2, 1fr);
@@ -118,4 +108,4 @@
   .our-team-container {
     grid-template-columns: repeat(4, 1fr);
   }
-}
+} */

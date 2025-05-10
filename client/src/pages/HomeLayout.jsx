@@ -5,16 +5,15 @@ import styled from "styled-components";
 import LeftSidebar from "../components/utils/sidebars/LeftSidebar";
 import RightSidebar from "../components/utils/sidebars/RightSidebar";
 
-
 const LayoutWrapper = styled.main`
-
-  @media screen and (min-width: 475px) {
-    /* margin-left: 0px;
-    margin-right: 0px; */
+  @media screen and (min-width: 768px) {
+    margin-left: 9%;
+    margin-right: 90px;
   }
+
   @media screen and (min-width: 1024px) {
-    margin-left: 240px;
-    margin-right: 400px;
+    margin-left: 220px;
+    margin-right: 360px;
   }
 `;
 
@@ -25,7 +24,7 @@ const HomeLayout = () => {
       <LayoutWrapper>
         <LeftSidebar />
         <Outlet />
-        <RightSidebar/>
+        <RightSidebar />
       </LayoutWrapper>
 
       {/* <footer>Footer</footer> */}

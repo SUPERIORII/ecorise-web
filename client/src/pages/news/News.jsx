@@ -1,80 +1,76 @@
-import React from "react";
+import React, { useState } from "react";
 import "../news/News.css";
-import { AiOutlineSearch } from "react-icons/ai";
 import { useQuery } from "@tanstack/react-query";
 import customUrl from "../../basedUrl";
-//
+import UniqueCategoriesList from "../../components/utils/Categories/UniqueCategoriesList";
+import moment from "moment";
+import LandingSkeleton from "../../components/utils/skeleton/LandingSkeleton";
+import SearchForm from "../../components/utils/SearchForm";
+import { useAuthContext } from "../../context/AppContext";
+import {Link} from "react-router-dom"
 
 const News = () => {
+  const {searchTerms} = useAuthContext()
+
+  console.log("searchTerms:", searchTerms);
+  
   const { isError, isLoading, data } = useQuery({
-    queryKey: ["latestnews"],
+    queryKey: ["news", searchTerms],
     queryFn: async () => {
-      const response = await customUrl.get("/api/news/fetch-news");
+      const response = await customUrl.get(
+        `/api/news/fetch-news/search?s=${searchTerms}`
+      );
+
       return response.data;
     },
   });
 
-  console.log(isError, isLoading, data);
-
   return (
     <div className="general-container">
-      <aside className="search-container">
-        <div className="search-wrapper">
-          <input
-            type="text"
-            className="search-bar"
-            placeholder="Search for News..."
-          />
-          <div className="search-icon-holder">
-            <AiOutlineSearch className="search-icon" />
-          </div>
-        </div>
-      </aside>
+      <SearchForm />
 
-      <div className="cartgory-btn-wrapper">
-        <button>#Climate</button>
-        <button>#Environment</button>
-        <button>#Climate</button>
-        <button>#Climate</button>
-        <button>#Climate</button>
-      </div>
+      {searchTerms && (
+            <span>
+              Search Match:
+              {data?.totalSearch}
+            </span>
+          )}
 
       <p className="news-title">{"LATEST NEWS".toUpperCase()}</p>
 
       <div className="news-wrapper">
-        {isError
-          ? "Error fetching news..."
-          : isLoading
-          ? "Loading..."
-          : data && data.length > 0
-          ? data.map((news) => {
-              const {
-                newsId: id,
-                newsImg,
-                title,
-                category,
-                relativeTime,
-                createdDate,
-              } = news;
-              return (
-                <section className="news-preview-list" key={id}>
+        {isError ? (
+          "Error fetching news..."
+        ) : isLoading ? (
+          <LandingSkeleton />
+        ) : data && data.result.length > 0 ? (
+          data.result.map((news) => {
+            const { id, category, news_img, created_date, title } = news;
+
+            return (
+              <section className="news-preview-list" key={id}>
+                <Link to={`/news/${id}`}>
                   <div className="news-preview-img">
-                    <img src={newsImg} alt="img" />
+                    <img src={news_img} alt="img" />
                   </div>
+                </Link>
 
-                  <div className="latest-info">
-                    <span>#{category}</span>
+                <div className="latest-info">
+                  <span>#{category}</span>
 
-                    <h4 className="preview-title">{title}</h4>
+                  <h4 className="preview-title">{title}</h4>
 
-                    <p className="news-preview-duration">
-                      {createdDate} &#126; {relativeTime}
-                    </p>
-                  </div>
-                </section>
-              );
-            })
-          : "news not found"}
+                  <p className="news-preview-duration">
+                    {moment(created_date).format("MMMM DD YYYY")} &#126;{" "}
+                    {moment(created_date).fromNow()}
+                  </p>
+                </div>
+              </section>
+            );
+          })
+        ) : (
+          "news not found"
+        )}
       </div>
     </div>
   );

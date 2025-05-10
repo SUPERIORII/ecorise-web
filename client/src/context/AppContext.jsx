@@ -8,6 +8,7 @@ const AuthContexProvider = createContext(null);
 const AppContext = ({ children }) => {
   const [toggleState, setToggleState] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
+  const [searchTerms, setSearchTerms] = useState("")
 
   //checking the user cerdentials again the system
   const login = async (input) => {
@@ -66,6 +67,8 @@ const AppContext = ({ children }) => {
         setToggleState,
         useToggle,
         logOut,
+        searchTerms, 
+        setSearchTerms
       }}
     >
       {children}

@@ -26,64 +26,81 @@
   font-weight: 600;
 }
 
-.resource-list div {
-  /* height: 7rem; */
-  /* w */
-}
-
-.resource-flex img {
-   width: 10rem;
-  height: 7rem;
+.resource-list img {
+  border-radius: 10px;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 16/11;
+  object-fit: cover;
+  object-position: 50% 10%;
   border-radius: var(--rounded-radius-20);
 }
 
-.resource-flex h4 {
-  margin: 5px 0;
-  max-width: 400px;
-}
-
-
 .resource-list {
-  display: flex;
+  aspect-ratio: 17/11;
+  /* display: flex; */
+  position: relative;
 }
 
-@media screen and (min-width: 475px) {
-  .ergi-resource-wrapper {
-    grid-template-columns: 1fr;
-  }
+.resource-desc .title {
+  color: white;
+  font-size: larger;
+  text-transform: uppercase;
+  font-weight: 300;
+}
+.resource-flex p {
+  margin-top: 15px;
+  margin-bottom: 20px;
+  color: var(--white-100);
+  font-size: clamp(0.9rem, 6vw, 1rem);
+  font-weight: 500;
+  text-transform: capitalize;
+}
+.resource-desc {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 20px 30px;
+  border-radius: 10px;
+}
 
+.resource-desc button {
+  background-color: var(--white-100);
+  color: var(--color-primary);
+  padding: 10px 10px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  /* font-size: 16px; */
+  font-weight: 600;
+  text-transform: capitalize;
+  border-radius: 5px;
+}
+
+@media screen and (min-width: 275px) {
   .resource-flex {
-    grid-template-columns: 1fr 1fr;
-  }
-
-
-  .resource-list {
-    flex-direction: column;
-  }
-}
-
-@media screen and (max-width: 475px) {
-  /* .ergi-resource-wrapper {
     grid-template-columns: 1fr;
+  }
+
+  /* .resource-list {
+    aspect-ratio: 17/8;
   } */
-
-  .resource-flex {
-    grid-template-columns: 1fr;
-  }
-
-  
-  .resource-list {
-    flex-direction: column;
-    gap: 0.25rem;
-  }
-
-  .resource-flex img {
-    width: 100%;
-    height: 100%;
-  }
 }
 
-@media screen and (min-width: 640px) {
+@media screen and (min-width: 768px) {
+  .resource-flex {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .resource-list {
+  aspect-ratio: 17/11;
+}
+}
+
+/* @media screen and (min-width: 640px) {
   .ergi-resource-wrapper {
     grid-template-columns: 1fr;
   }
@@ -118,4 +135,4 @@
   .project-wrapper {
     grid-template-columns: repeat(4, 1fr);
   }
-}
+} */

@@ -14,14 +14,15 @@ import {
   Profile,
   EditProfile,
   Admin,
-  Video
+  Video,
+  DetailPage
+  
 } from "../src/pages";
 
 import { Login, Register } from "./Authentications/index";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "react-toastify/ReactToastify.css";
 import LeftHomeNewSkeleton from "./pages/homepage/homenews/LeftHomeNewSkeleton";
-import { useAuthContext } from "./context/AppContext";
 // fetch a user from the database
 
 // console.log(currentUser);
@@ -37,12 +38,13 @@ const router = createBrowserRouter([
       { path: "news", element: <News /> },
       { path: "projects", element: <Project /> },
       { path: "resources", element: <Resources /> },
-      { path: "profile/:psudoname", element: <Profile /> },
       { path: "/:psudoname/editproifle", element: <EditProfile /> },
     ],
   },
+  { path: "profile/:psudoname", element: <Profile /> },
+  { path: "/news/:eid", element: <DetailPage /> },
   { path: "/admin", element: <Admin /> },
-  {path: "/video", element: <Video /> },
+  { path: "/video", element: <Video /> },
   { path: "/login", element: <Login /> },
   { path: "/register", element: <Register /> },
   { path: "/skeleton", element: <LeftHomeNewSkeleton /> },

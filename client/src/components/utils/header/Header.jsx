@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import LeftHeader from "./LeftHeader";
 import MiddleHeader from "./MiddleHeader";
 import RightHeader from "./RightHeader";
+import { Link } from "react-router-dom";
 
 // import Wrapper from "../../styles/Header";
 import styled from "styled-components";
@@ -30,6 +31,7 @@ const Header = () => {
       {/*<MiddleHeader />*/}
       <RightHeader />
       {/* <LowerHeader /> */}
+      <Link to="/login">login</Link>
     </Wrapper>
   );
 };

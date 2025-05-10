@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   HeroSection,
   Introduction,
@@ -7,31 +7,20 @@ import {
   HomeNews,
   Resources,
 } from "../homepage/index";
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
+
 
 const Home = () => {
-  const handleScroll = () => {
-    console.log("HTML Height: ", document.documentElement.scrollHeight);
-    console.log("HTML width: ", document.documentElement.scrollWidth);
-    console.log("top: ", document.documentElement.scrollTop);
-    console.log("Window Height: ", window.innerHeight);
-    console.log("window Width: ", window.innerWidth);
-  };
 
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      console.log("cancelled");
-    };
-  });
+  // fetch the data
 
   return (
     <div className="general-container">
       <HeroSection />
       <Introduction />
-      <ProjectSection />
       <OurTeam />
+      <ProjectSection />
+
       <HomeNews />
       <Resources />
     </div>

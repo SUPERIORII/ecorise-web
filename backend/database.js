@@ -108,6 +108,30 @@ const createTables = () => {
     console.log("news table created successfully");
   });
 
+  // news table query
+  const resourcesableQuery = ` 
+  CREATE TABLE IF NOT EXISTS resources(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    description VARCHAR(255),
+    category TEXT,
+    user_id INT,
+    created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    resources_thumbnail VARCHAR(255) NOT NULL,
+    resources_video VARCHAR(255) NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+    )
+  `;
+  
+  db.query(resourcesableQuery, function (err) {
+    if (err) {
+      console.log("error creating Resources table:", err.message);
+      return;
+    }
+
+    console.log("Resources table created successfully");
+  });
+
   //member table query
   const memberTableQuery = ` 
   CREATE TABLE IF NOT EXISTS members(

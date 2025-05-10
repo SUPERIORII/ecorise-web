@@ -1,11 +1,11 @@
 
-GET http://localhost:3000/item?item=10&page=2
+GET http://localhost:3000/feed?page=1
 
 ###
 
 POST http://localhost:3000/api/upload
 # Content-Type: application/json
-Content-Type: 
+
 
 
 {
@@ -19,41 +19,42 @@ Content-Type: application/json
 {
    "profile": "abraham"
 }
-###
 
-GET http://localhost:3000/api/user/find/abraham_OvYeo5
 
 
 ###
-GET  http://localhost:3000/api/news/latest-news
+GET  http://localhost:3000/api/news/latest-news?quer
 Content-Type: application/json
 
 
 ###
-GET  http://localhost:3000/api/news/fetch-news
+GET  http://localhost:3000/api/news/singlenews?id=1
 Content-Type: application/json
+
+
+
 ###
-POST  http://localhost:3000/api/upload
+GET  http://localhost:3000/api/news/getnews
 Content-Type: application/json
 
-
-{
-   "file": "../src/assets/03a6acdf091c4972ac8bcc3e65d010de.jpg"
-}
 
 ###
 POST http://localhost:3000/api/news/add-news
 Content-Type: application/json
 
 {
-   "title": "second News Title",
-   "description": "Environment cleaning description",
-   "category": "Environment",
+   "title": "four News Title",
+   "description": "climate description",
+   "category": "cafe",
    "newsImg": "../src/assets/91925a99b7054ef8c69f04d4e05d488d.jpg"
 }
 
 ###
 GET http://localhost:3000/api/projects/fetchProject
+Content-Type: application/json
+
+### Pagination route
+GET http://localhost:3000/api/projects/project?item=3&page=2
 Content-Type: application/json
 ###
 GET http://localhost:3000/api/projects/latest-projects
@@ -64,9 +65,9 @@ POST http://localhost:3000/api/projects/addProject
 Content-Type: application/json
 
 {
-   "title": "this is a great project for environemt",
-   "description": "eeeeeeeeekeowoi euieinreo eorewon eeone hhh",
-   "projectImg": "../src/assets/img-2.jpg"
+   "title": "Project eleven",
+   "description": "Description of the fifth project",
+   "projectImg": "../src/assets/lego.png"
 }
 
 ###
@@ -83,7 +84,9 @@ Content-Type: application/json
 ###
 GET http://localhost:3000/api/members/latest
 ###
-GET http://localhost:3000/api/links
+GET http://localhost:3000/api/resource/latest-resources
+###
+GET http://localhost:3000/api/resource/full-resources
 
 
 
@@ -92,8 +95,8 @@ POST http://localhost:3000/api/auth/login
 Content-Type: application/json
  
 {
-   "email": "adama@gmail.com",
-   "password": "adama"
+   "email": "ab@gmail.com",
+   "password": "abraham"
 }
 
 

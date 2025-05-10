@@ -3,32 +3,24 @@ const db = require("../database");
 const moment = require("moment");
 
 const fetchProjects = (req, res) => {
-  const projects = { result: [] };
+  const query = `SELECT p.id AS project_id, p.title, p.description, p.project_img, p.created_date, u.id AS user_id, u.username,u.shadowname AS psudo_name, u.user_profile, u.user_role FROM project AS p JOIN users 
+    AS u ON(u.id=p.user_id) ORDER BY p.created_date DESC LIMIT 2`;
+
+  db.query(query, (err, result) => {
+    if (err) return res.status(500).json(err.message);
+
+    res.json(result);
+  });
+};
+
+const getAllProjects = (req, res) => {
   const query = `SELECT p.id AS project_id, p.title, p.description, p.project_img, p.created_date, u.id AS user_id, u.username,u.shadowname AS psudo_name, u.user_profile, u.user_role FROM project AS p JOIN users 
     AS u ON(u.id=p.user_id) ORDER BY p.created_date DESC`;
 
   db.query(query, (err, result) => {
     if (err) return res.status(500).json(err.message);
 
-    result.map((project) => {
-      const info = {
-        projectId: project.project_id,
-        title: project.title,
-        description: project.description,
-        projectImg: project.project_img,
-        createdAt: moment(project.created_date).format("D MMMM"),
-        relativeDuration: moment(project.created_date).fromNow(),
-        userId: project.user_id,
-        username: project.username,
-        psudoName: project.psudo_name,
-        userProfile: project.user_profile,
-        userRole: project.user_role,
-      };
-
-      projects.result.push(info);
-    });
-
-    res.json(projects);
+    res.json(result);
   });
 };
 
@@ -62,10 +54,16 @@ const addProjects = (req, res) => {
 
       // Store the project information in the database if all requirement is met
       const query =
-        "INSERT INTO project(title,description, project_img, user_id) VALUE(?,?,?,?)";
+        "INSERT INTO project(title,description, project_img, user_id, created_date) VALUE(?,?,?,?,?)";
       db.query(
         query,
-        [title, description, projectImg, userInfo.userId],
+        [
+          title,
+          description,
+          projectImg,
+          userInfo.userId,
+          moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
+        ],
         (err, result) => {
           if (err) return res.status(500).json(err.message);
 
@@ -76,4 +74,9 @@ const addProjects = (req, res) => {
   });
 };
 
-module.exports = { fetchProjects, addProjects, latestProjects };
+module.exports = {
+  fetchProjects,
+  addProjects,
+  latestProjects,
+  getAllProjects,
+};

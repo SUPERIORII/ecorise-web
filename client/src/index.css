@@ -16,6 +16,7 @@
   --color-primary: #8b4513;
   --white-200: #f2f2f2;
   --white-300: #ebebeb;
+  --white-400: #e4e4e4;
   --white-100: #ffffff;
   --title-color: #8f8e8e;
   --color-black: #000000;
@@ -56,12 +57,28 @@ html {
   border-radius: 50%;
   margin-left: 10px;
   cursor: pointer;
-  transition: .2s ease-in;
+  transition: 0.2s ease-in;
 }
 
 .extra:hover {
   background-color: var(--white-300);
+}
 
+.arrow-right,
+.arrow-left {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.left {
+  left: 20px;
+}
+.right {
+  right: 0;
 }
 
 .general-container {
@@ -90,7 +107,27 @@ a:hover {
 body {
   min-width: 320px;
   min-height: 100vh;
+}
 
+/* global icons */
+
+.global-icon {
+  font-size: 40px;
+  color: var(--color-primary);
+  cursor: pointer;
+}
+
+/* global arrow icons */
+.global-icon {
+  font-size: 40px;
+  color: var(--white-100);
+  cursor: pointer;
+  opacity: 0.5;
+  transition: 100ms ease-in-out;
+}
+
+.global-icon:hover {
+  opacity: 1;
 }
 
 button:focus,

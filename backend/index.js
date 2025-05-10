@@ -62,11 +62,11 @@ const userRoute = require("./routes/user");
 const projectRoute = require("./routes/project");
 const membersRoute = require("./routes/member");
 const menuLinksRoute = require("./routes/menuLinks");
+const resourcesRoute = require("./routes/resources")
 const db = require("./database");
 
 app.post("/api/upload", upload.single("file"), (req, res) => {
-  res.json("upload successful");
-  console.log(req.file);
+  res.json(req.file);
 });
 
 app.use("/api/links", menuLinksRoute);
@@ -76,28 +76,62 @@ app.use("/api/news", newRoute);
 app.use("/api", userRoute);
 app.use("/api/projects", projectRoute);
 app.use("/api/members", membersRoute);
+app.use("/api/resource", resourcesRoute);
 
 app.get("/", (req, res) => {
   res.send("Server is running");
 });
 
-app.get("/item", (req, res) => {
-  const page = parseInt(req.query.page);
-  const item = parseInt(req.query.item);
- const limit = 10;
+// app.get("/feed", async (req, res) => {
+//   const page = parseInt(req.query.page);
+//   const items = 2;
 
-  const offSet = (page - 1) * limit;
+//   const offSet = (page - 1) * items;
 
-  console.log(`page number:${page}`);
-  console.log(`skep row number: ${offSet}`);
+//   console.log(`page number:${page}`);
+//   console.log(`skip row number: ${offSet}`);
+//   console.log(`Item return: ${items}`);
 
-  const query = "SELECT * FROM project LIMIT ?,?";
+//   try {
+//     const [homeProjects] = await db.promise().query(
+//       `SELECT p.id, p.title, p.created_date, p.description AS projectDesc, p.project_img AS project_url,
+//        u.id AS usersId, u.shadowname, u.user_profile AS user_img, u.username FROM project p JOIN users 
+//        u ON(u.id=p.user_id) ORDER BY p.created_date DESC LIMIT 2 OFFSET ?`,
+//       [offSet]
+//     );
 
-  db.query(query, [offSet, item], (err, result) => {
-    if (err) return res.status(500).json(err.message);
+//     const [homeNews] = await db
+//       .promise()
+//       .query(
+//         `SELECT * FROM news n ORDER BY n.created_date DESC LIMIT 2 OFFSET ?`,
+//         [offSet]
+//       );
 
-    return res.json(result);
-  });
-});
+//     const feed = [
+//       ...homeProjects.map((item) => ({ type: "project", ...item })),
+//       ...homeNews.map((item) => ({ type: "news", ...item })),
+//     ];
 
-app.listen(3000, console.log("server is listening on port 3000"));
+//     res.status(200).json({
+//       feed,
+//       dataLength: feed.length,
+//       page: page,
+//     });
+ 
+//   } catch (error) {
+//     console.error(error);
+//   }
+
+//   // db.query(query, [offSet, item], (err, result) => {
+//   //   if (err) return res.status(500).json(err.message);
+
+//   //   console.log(result.length);
+
+//   //   return res.json(result);
+//   // });
+// });
+
+app.listen(
+  3000,
+  console.log(`server is listening on port http://localhost:3000`)
+);

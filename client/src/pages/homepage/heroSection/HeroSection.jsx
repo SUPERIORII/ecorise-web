@@ -94,7 +94,7 @@ const HeroSection = () => {
           />
           <FaChevronCircleRight
             className={
-              currentItem === silderImg.length - 1
+              silderImg.currentItem === silderImg.length - 1
                 ? "slide-right hide"
                 : "slide-right"
             }
