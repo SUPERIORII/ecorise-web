@@ -2,13 +2,15 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import customUrl from "../basedUrl";
 import { useQuery } from "@tanstack/react-query";
+import useAuthStore from "../Authentications/store";
 
-const AuthContexProvider = createContext(null);
+const AuthContexProvider = createContext();
+
 
 const AppContext = ({ children }) => {
   const [toggleState, setToggleState] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
-  const [searchTerms, setSearchTerms] = useState("")
+  const [searchTerms, setSearchTerms] = useState("");
 
   //checking the user cerdentials again the system
   const login = async (input) => {
@@ -22,27 +24,9 @@ const AppContext = ({ children }) => {
     setToggleState(newState);
   };
 
-  // fetching the user
-  // const user = useQuery({
-  //   queryKey: ["user"],
-  //   queryFn: () => {
-  //     customUrl.get("/api/find/user").then((response) => {
-  //       return response.data
-  //     });
-  //   },
-  // });
-
-  // console.log(user);
-
   // logout user function
   const logOut = async () => {
-    const response = await customUrl.post("/api/auth/logout");
-
-    if (response.status === 200) {
-      toast.success(response.data);
-    }
-
-    console.log(response);
+    await customUrl.post("/api/auth/logout");    
   };
 
   //
@@ -56,8 +40,6 @@ const AppContext = ({ children }) => {
     },
   });
 
-
-
   return (
     <AuthContexProvider.Provider
       value={{
@@ -67,8 +49,8 @@ const AppContext = ({ children }) => {
         setToggleState,
         useToggle,
         logOut,
-        searchTerms, 
-        setSearchTerms
+        searchTerms,
+        setSearchTerms,
       }}
     >
       {children}

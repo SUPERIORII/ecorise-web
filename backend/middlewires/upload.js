@@ -4,7 +4,7 @@ const path = require("path");
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    const pathDirectory = "./images";
+    const pathDirectory = "../client/public/upload";
 
     if (!fs.existsSync(pathDirectory)) {
       fs.mkdirSync(pathDirectory, { recursive: true });
@@ -32,8 +32,6 @@ const upload = multer({
     } else {
       cb(new Error("File type is not supported"));
     }
-    // mimetype && extname? cb(null, true) : cb(new Error("Error: File type is not supported"))
-    // console.log(file.size);
   },
 });
 

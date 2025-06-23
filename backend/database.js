@@ -31,7 +31,7 @@ const createTables = () => {
     first_name VARCHAR(255),
     Last_name VARCHAR(255),
     password VARCHAR(255),
-    user_role ENUM("admin", "super admin"),
+    user_role ENUM("guest", "admin", "super admin"),
     user_profile VARCHAR(255),
     create_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )
@@ -71,6 +71,7 @@ const createTables = () => {
     title VARCHAR(255) NOT NULL UNIQUE,
     description VARCHAR(255),
     project_img VARCHAR(255) NOT NULL UNIQUE,
+    unique_id VARCHAR(255),
     user_id INT,
     created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id)
@@ -92,13 +93,14 @@ const createTables = () => {
     title VARCHAR(255) NOT NULL,
     description VARCHAR(255),
     category TEXT,
+    news_slug VARCHAR(255),
+    news_img VARCHAR(255) NOT NULL,
     user_id INT,
     created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    news_img VARCHAR(255) NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id)
     )
   `;
-  
+
   db.query(newsTableQuery, function (err) {
     if (err) {
       console.log("error creating News table:", err.message);
@@ -122,7 +124,7 @@ const createTables = () => {
     FOREIGN KEY (user_id) REFERENCES users(id)
     )
   `;
-  
+
   db.query(resourcesableQuery, function (err) {
     if (err) {
       console.log("error creating Resources table:", err.message);
@@ -172,12 +174,15 @@ const createTables = () => {
   });
 
   //member table query
-  const menuLinksTableQuery = ` 
+  const menuLinksTableQuery = `
   CREATE TABLE IF NOT EXISTS menu_links(
     id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(30),
-    link VARCHAR(30),
-    icon VARCHAR(30)
+    menu_name VARCHAR(30) NOT NULL,
+    link VARCHAR(30) NOT NULL,
+    icon VARCHAR(30) NOT NULL,
+    user_id INT,
+    user_role VARCHAR(255),
+    FOREIGN KEY (user_id) REFERENCES users(id)
     )
   `;
 

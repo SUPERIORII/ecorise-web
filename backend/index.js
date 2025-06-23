@@ -6,34 +6,33 @@ const cookieParser = require("cookie-parser");
 const path = require("path");
 const fs = require("fs");
 const multer = require("multer");
-const upload = require("./middlewires/upload");
 
-// const storage = multer.diskStorage({
-//   destination: (req, file, cb) => {
-//     const uploadPath = "../client/public/upload";
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    const uploadPath = "../client/public/upload";
 
-//     !fs.existsSync(uploadPath)
-//       ? fs.mkdirSync(uploadPath)
-//       : cb(null, uploadPath);
-//   },
-//   filename: (req, file, cb) => {
-//     cb(null, Date.now() + path.extname(file.originalname));
-//   },
-// });
+    !fs.existsSync(uploadPath)
+      ? fs.mkdirSync(uploadPath)
+      : cb(null, uploadPath);
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + path.extname(file.originalname));
+  },
+});
 
-// const upload = multer({
-//   storage: storage,
-//   fileFilter: (req, file, cb) => {
-//     const fileType = /jpg|jpeg|png|svg/;
+const upload = multer({
+  storage: storage,
+  fileFilter: (req, file, cb) => {
+    const fileType = /jpg|jpeg|png|svg/;
 
-//     const extname = fileType.test(fileType);
-//     //  check if the file has the above extension
-//     console.log(extname);
+    const extname = fileType.test(fileType);
+    //  check if the file has the above extension
+    console.log(extname);
 
-//     if (extname) return cb(null, true);
-//     console.log("upload image only");
-//   },
-// });
+    if (extname) return cb(null, true);
+    console.log("upload image only");
+  },
+});
 
 // middlewares
 
@@ -74,7 +73,7 @@ app.use("/api/links", menuLinksRoute);
 app.use("/api/auth", authRoute);
 app.use("/api/news", newRoute);
 app.use("/api", userRoute);
-app.use("/api/projects", projectRoute);
+app.use("/api/project", projectRoute);
 app.use("/api/members", membersRoute);
 app.use("/api/resource", resourcesRoute);
 

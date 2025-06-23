@@ -12,7 +12,7 @@ const ResourcesRapper = styled.div`
     margin-bottom: 20px;
     background-color: white;
     /* border-bottom: 1px solid var(--color-primary); */
-z-index: 99;
+    z-index: 99;
     display: flex;
     gap: 3rem;
   }
@@ -47,7 +47,7 @@ const Resources = () => {
   console.log(data);
 
   return (
-    <ResourcesRapper className="general-container">
+    <ResourcesRapper>
       <nav className="resource-nav-container">
         {/* article */}
         <div className="nav-item">

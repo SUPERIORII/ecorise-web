@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { ENDPOINTS } from "../constants/Constants";
+
 const Thumbnail = styled.div`
   .thumbnail-section {
     margin-top: 20px;
@@ -44,10 +46,11 @@ const RelatedThumbnail = ({
         ? "error loading related news"
         : isRelatedLoading
         ? "Loading..."
-        : relatedNews && relatedNews.length >0 ? relatedNews.map((relatednew) =>{
+        : relatedNews && relatedNews.length > 0
+        ? relatedNews.map((relatednew) => {
             return (
               <Thumbnail key={relatednew.id}>
-                <a href={`/news/${relatednew.id}`}>
+                <a href={ENDPOINTS.SPECIFIC_QUERY_NEWS + relatednew.news_slug}>
                   <section className="thumbnail-section">
                     <aside>
                       <img
@@ -67,8 +70,8 @@ const RelatedThumbnail = ({
                 </a>
               </Thumbnail>
             );
-        }
-        ): "No Related Data found"}
+          })
+        : "No Related Data found"}
     </div>
   );
 };

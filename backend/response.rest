@@ -1,5 +1,23 @@
 
-GET http://localhost:3000/feed?page=1
+###
+GET http://localhost:3000/api/news/eginews?egid=bb6ecb84-5d09-42ba-994b-67d238887df2
+###
+GET http://localhost:3000/api/news/
+###
+GET http://localhost:3000/api/news/latestNews
+
+###
+POST http://localhost:3000/api/news
+Content-Type: application/json
+
+{
+    "title": "The Environment is clean",
+    "description": "Environemt is the best here",
+    "category": "Ecosystem",
+    "newsImg": "uuuuu"
+}
+
+
 
 ###
 
@@ -17,11 +35,20 @@ POST http://localhost:3000/api/user
 Content-Type: application/json
 
 {
-   "profile": "abraham"
+   "username": "massa",
+   "email": "massa@gmail.com", 
+   "password": "massa",
+   "role": "admin",
+   "profile": ""
 }
 
+###
+GET http://localhost:3000/api/getusers
+Content-Type: application/json
 
 
+
+  
 ###
 GET  http://localhost:3000/api/news/latest-news?quer
 Content-Type: application/json
@@ -29,6 +56,9 @@ Content-Type: application/json
 
 ###
 GET  http://localhost:3000/api/news/singlenews?id=1
+Content-Type: application/json
+###
+GET  http://localhost:3000/api/news/fetch-news/search?s=movies
 Content-Type: application/json
 
 
@@ -43,10 +73,10 @@ POST http://localhost:3000/api/news/add-news
 Content-Type: application/json
 
 {
-   "title": "four News Title",
-   "description": "climate description",
-   "category": "cafe",
-   "newsImg": "../src/assets/91925a99b7054ef8c69f04d4e05d488d.jpg"
+   "title": "5th project News Title",
+   "description": "this is our fifth project description",
+   "category": "climite action 2025",
+   "newsImg": "../src/assets/react.svg"
 }
 
 ###
@@ -61,13 +91,13 @@ GET http://localhost:3000/api/projects/latest-projects
 Content-Type: application/json
 ###
 
-POST http://localhost:3000/api/projects/addProject
+POST http://localhost:3000/api/project
 Content-Type: application/json
 
 {
    "title": "Project eleven",
    "description": "Description of the fifth project",
-   "projectImg": "../src/assets/lego.png"
+   "projectImg": "./src/assets/03a6acdf091c4972ac8bcc3e65d010de.jpg"
 }
 
 ###
@@ -75,10 +105,10 @@ POST http://localhost:3000/api/auth/register
 Content-Type: application/json
 
 {
-    "username":"abraham", 
-    "email":"ab@gmail.com", 
+    "username":"mohammed", 
+    "email":"mohammed@gmail.com", 
     "role":"admin", 
-    "password": "abraham"
+    "password": ",mohammed"
 }
 
 ###
@@ -95,7 +125,7 @@ POST http://localhost:3000/api/auth/login
 Content-Type: application/json
  
 {
-   "email": "ab@gmail.com",
+   "email": "abraham@gmail.com",
    "password": "abraham"
 }
 
@@ -112,3 +142,20 @@ Content-Type: application/json
  {
    "profile" : "../src/assets/03a6acdf091c4972ac8bcc3e65d010de.jpg"
  }
+
+
+###
+GET http://localhost:3000/api/getusers
+###
+GET http://localhost:3000/api/links
+###
+POST http://localhost:3000/api/links
+Content-Type: application/json
+
+
+{
+"menu_name":"activity logs", 
+"link":"/users", 
+"icon":"BiBroadcast",
+"userRole": "super admin"
+}

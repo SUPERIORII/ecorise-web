@@ -3,13 +3,15 @@ const {
   addProjects,
   fetchProjects,
   latestProjects,
-  getAllProjects,
+  getProjects,
 } = require("../controllers/projects");
 const router = express.Router();
 
+router.post("/", addProjects);
+router.get("/", getProjects);
+
+// additional route to be spe
 router.get("/fetchProject", fetchProjects);
-router.get("/project", getAllProjects);
 router.get("/latest-projects", latestProjects);
-router.post("/addProject", addProjects);
 
 module.exports = router;

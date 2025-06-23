@@ -32,7 +32,7 @@ const Project = () => {
   console.log("data:", data);
 
   return (
-    <div className="general-container">
+    <div>
       {/* search input */}
       <aside className="search-container">
         <div className="search-wrapper">

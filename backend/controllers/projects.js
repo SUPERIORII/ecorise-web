@@ -1,19 +1,9 @@
 const jwt = require("jsonwebtoken");
 const db = require("../database");
 const moment = require("moment");
+const { v4: uuid } = require("uuid");
 
-const fetchProjects = (req, res) => {
-  const query = `SELECT p.id AS project_id, p.title, p.description, p.project_img, p.created_date, u.id AS user_id, u.username,u.shadowname AS psudo_name, u.user_profile, u.user_role FROM project AS p JOIN users 
-    AS u ON(u.id=p.user_id) ORDER BY p.created_date DESC LIMIT 2`;
-
-  db.query(query, (err, result) => {
-    if (err) return res.status(500).json(err.message);
-
-    res.json(result);
-  });
-};
-
-const getAllProjects = (req, res) => {
+const getProjects = (req, res) => {
   const query = `SELECT p.id AS project_id, p.title, p.description, p.project_img, p.created_date, u.id AS user_id, u.username,u.shadowname AS psudo_name, u.user_profile, u.user_role FROM project AS p JOIN users 
     AS u ON(u.id=p.user_id) ORDER BY p.created_date DESC`;
 
@@ -24,18 +14,11 @@ const getAllProjects = (req, res) => {
   });
 };
 
-const latestProjects = (req, res) => {
-  const query = "SELECT * FROM project ORDER BY created_date DESC LIMIT ?";
-
-  db.query(query, [2], (err, result) => {
-    if (err) return res.status(500).json(err);
-    res.status(200).json(result);
-  });
-};
-
 const addProjects = (req, res) => {
   const token = req.cookies.infoToken;
   const { title, description, projectImg } = req.body;
+  // GETTING A UNIQUE ID FOR EACH PROJECT
+  const ProjectUniqueId = uuid();
 
   jwt.verify(token, process.env.SECRET, (err, userInfo) => {
     if (err) return res.status(401).json("Session Expired!!");
@@ -54,7 +37,7 @@ const addProjects = (req, res) => {
 
       // Store the project information in the database if all requirement is met
       const query =
-        "INSERT INTO project(title,description, project_img, user_id, created_date) VALUE(?,?,?,?,?)";
+        "INSERT INTO project(title,description, project_img, user_id, unique_id, created_date) VALUE(?,?,?,?,?,?)";
       db.query(
         query,
         [
@@ -62,6 +45,7 @@ const addProjects = (req, res) => {
           description,
           projectImg,
           userInfo.userId,
+          ProjectUniqueId,
           moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
         ],
         (err, result) => {
@@ -74,9 +58,29 @@ const addProjects = (req, res) => {
   });
 };
 
+const fetchProjects = (req, res) => {
+  const query = `SELECT p.id AS project_id, p.title, p.description, p.project_img, p.created_date, u.id AS user_id, u.username,u.shadowname AS psudo_name, u.user_profile, u.user_role FROM project AS p JOIN users 
+    AS u ON(u.id=p.user_id) ORDER BY p.created_date DESC LIMIT 3`;
+
+  db.query(query, (err, result) => {
+    if (err) return res.status(500).json(err.message);
+
+    res.json(result);
+  });
+};
+
+const latestProjects = (req, res) => {
+  const query = "SELECT * FROM project ORDER BY created_date DESC LIMIT ?";
+
+  db.query(query, [2], (err, result) => {
+    if (err) return res.status(500).json(err);
+    res.status(200).json(result);
+  });
+};
+
 module.exports = {
   fetchProjects,
   addProjects,
   latestProjects,
-  getAllProjects,
+  getProjects,
 };

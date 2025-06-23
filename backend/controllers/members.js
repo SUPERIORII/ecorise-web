@@ -2,7 +2,7 @@ const db = require("../database");
 
 const getLatestMembers = (req, res) => {
   const query = `SELECT s.id AS sociallink_id, s.facebook_Url, s.whatsapp_Url, s.instagram_Url, s.user_id, u.username,u.shadowname AS psudo_name, u.user_profile, u.user_role FROM social_links AS s JOIN users 
-    AS u ON(u.id=s.user_id) ORDER BY create_at DESC  LIMIT ?`;
+    AS u ON(u.id=s.user_id) LIMIT ?`;
   // ORDER BY create_at DESC LIMIT ?";
 
   db.query(query, [4], (err, result) => {

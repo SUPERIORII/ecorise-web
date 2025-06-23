@@ -77,6 +77,7 @@ const FormWrapper = styled.section`
     font-size: 18px;
     outline: none;
     width: 100%;
+    color: black;
   }
 
   .pw-ic-wrapper {

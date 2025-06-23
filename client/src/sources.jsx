@@ -1,4 +1,11 @@
-import { FaLowVision, FaMapSigns, FaPumpSoap } from "react-icons/fa";
+import {
+  FaChevronCircleRight,
+  FaLowVision,
+  FaMapSigns,
+  FaPumpSoap,
+} from "react-icons/fa";
+
+
 
 export const aboutUsInfo = [
   { id: 1, title: "our purpose", icon: <FaLowVision />, className: "purpose" },
@@ -6,27 +13,28 @@ export const aboutUsInfo = [
   { id: 3, title: "our vision", icon: <FaPumpSoap />, className: "vision" },
 ];
 
-export const HeaderMenu = [
-  { id: "1", linkName: "What We Do", linkUrl: "/what-we-do" },
-  { id: "2", linkName: "About Us", linkUrl: "/about-us" },
-  { id: "3", linkName: "Projects", linkUrl: "/projects" },
-  { id: "4", linkName: "Resources", linkUrl: "/resources" },
-  { id: "5", linkName: "News", linkUrl: "/news" },
-  { id: "6", linkName: "Get Involved", linkUrl: "/get-involved" },
+export const navLinks = [
+  { id: "2", text: "About Us", url: "about-us" },
+  { id: "3", text: "Projects", url: "projects" ,},
+  { id: "4", text: "Resources", url: "resources" , },
+  { id: "5", text: "News", url: "news" },
+  { id: "6", text: "Get Involved", url: "get-involved", },
 ];
 
-export const SingleImages = [
-  { id: 1, image: "../src/assets/03a6acdf091c4972ac8bcc3e65d010de.jpg" },
-];
+export const SingleImages = {
+  id: 1,
+  image: "../src/assets/03a6acdf091c4972ac8bcc3e65d010de.jpg",
+};
+
 export const multipleImages = [
   {
     id: 1,
     image: "../src/assets/03a6acdf091c4972ac8bcc3e65d010de.jpg",
   },
-  { id: 2, image: "../src/assets/img-2.jpg" },
+  { id: 2, image: "../src/assets/new-2.jpg" },
   {
     id: 3,
-    image: "../src/assets/91925a99b7054ef8c69f04d4e05d488d.jpg",
+    image: "../src/assets/new-1.jpg",
   },
 ];
 
@@ -78,4 +86,26 @@ export const organization = [
     name: "GREENPEACE",
     img: `../src/assets/logo.png`,
   },
+];
+
+export const contents = [
+  { id: 1, content: "user", icon: <FaChevronCircleRight /> },
+  { id: 2, content: "project", icon: <FaChevronCircleRight /> },
+  { id: 3, content: "news", icon: <FaChevronCircleRight /> },
+  { id: 4, content: "resources", icon: <FaChevronCircleRight /> },
+];
+
+
+            // <AiFillMail className="icon" />
+            // <AiOutlineWhatsApp className="icon" />
+
+            import {
+              AiFillFacebook,
+              AiFillMail,
+              AiOutlineWhatsApp,
+            } from "react-icons/ai";
+export const socialIcon = [
+  { id: 1, url: "https://www.facebook.com", icon: <AiFillFacebook /> },
+  { id: 2, url: "https://www.facebook.com", icon: <AiFillMail /> },
+  { id: 3, url: "https://www.facebook.com", icon: <AiOutlineWhatsApp /> },
 ];

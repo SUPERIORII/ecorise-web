@@ -15,7 +15,7 @@ import {
   BiVolumeFull,
   BiVolumeLow,
 } from "react-icons/bi";
-import Header from "../components/utils/header/Header";
+// import Header from "../components/utils/header/Header";
 
 const VideoContainer = styled.div`
   max-width: 1000px;
@@ -477,7 +477,7 @@ const Video = () => {
   return (
     <section className="general-container">
       {/* header */}
-      <Header />
+      {/* <Header /> */}
       <VideoContainer
         className="video-container "
         // onClick={handlePlay}

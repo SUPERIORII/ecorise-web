@@ -1,4 +1,5 @@
-export { default as Homepage } from "./homepage/Homepage";
+export { default as HomePage } from "./HomePage";
+export { default as AdminPage } from "./AdminPage";
 export { default as AboutUs } from "./aboutUs/AboutUs";
 export { default as GetInvolve } from "./getinvolve/GetInvolved";
 export { default as News } from "./news/News";
@@ -7,8 +8,13 @@ export { default as Resources } from "./Resources/Resources";
 export { default as HomeLayout } from "./HomeLayout";
 export { default as PageNotFound } from "./PageNotFound";
 export { default as LandingSkeleton } from "../components/utils/skeleton/LandingSkeleton";
-export {default as Profile} from "../pages/profile/Profile"
-export {default as EditProfile} from "../pages/EditProfile"
-export {default as Admin} from "../pages/Admin"
-export {default as Video} from "../pages/Video"
+export { default as Profile } from "../pages/profile/Profile";
+export { default as EditProfile } from "../pages/EditProfile";
+export { default as Admin } from "./admin/Admin";
+export { default as Video } from "../pages/Video";
 export { default as DetailPage } from "../pages/DetailPage";
+export { default as Users } from "./admin/Users";
+export { default as AdminProject } from "./admin/AdminProject";
+export { default as ContentManagement } from "./ContentManagement";
+export { default as Login } from "./Login";
+export { default as Register } from "./Register"; 

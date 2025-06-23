@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import "./App.css";
 import "./index.css";
+// import "./styles/general-styles.css";
 import {
-  Homepage,
+  // Homepage,
+  HomePage,
+  AdminPage,
   AboutUs,
   GetInvolve,
   News,
@@ -15,47 +17,54 @@ import {
   EditProfile,
   Admin,
   Video,
-  DetailPage
-  
+  DetailPage,
+  Users,
+  AdminProject,
+  ContentManagement,
+  Login, Register
 } from "../src/pages";
 
-import { Login, Register } from "./Authentications/index";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+// import { Login, Register } from "./Authentications/index";
+import { Routes, Route } from "react-router-dom";
 import "react-toastify/ReactToastify.css";
-import LeftHomeNewSkeleton from "./pages/homepage/homenews/LeftHomeNewSkeleton";
-// fetch a user from the database
-
-// console.log(currentUser);
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <HomeLayout />,
-    children: [
-      { index: true, element: <Homepage /> },
-      { path: "about-us", element: <AboutUs /> },
-      { path: "get-involved", element: <GetInvolve /> },
-      { path: "news", element: <News /> },
-      { path: "projects", element: <Project /> },
-      { path: "resources", element: <Resources /> },
-      { path: "/:psudoname/editproifle", element: <EditProfile /> },
-    ],
-  },
-  { path: "profile/:psudoname", element: <Profile /> },
-  { path: "/news/:eid", element: <DetailPage /> },
-  { path: "/admin", element: <Admin /> },
-  { path: "/video", element: <Video /> },
-  { path: "/login", element: <Login /> },
-  { path: "/register", element: <Register /> },
-  { path: "/skeleton", element: <LeftHomeNewSkeleton /> },
-  { path: "*", element: <PageNotFound /> },
-]);
+// import LeftHomeNewSkeleton from "./pages/homepage/homenews/LeftHomeNewSkeleton";
+import RequiredAuth from "./components/RequiredAuth";
+import { LoginOld } from "./Authentications";
 
 function App() {
   return (
-    <>
-      <RouterProvider router={router} />
-    </>
+    <Routes>
+      <Route path="/" element={<HomeLayout />}>
+        <Route path="/" element={<HomePage />} />
+        <Route path="about-us" element={<AboutUs />} />
+        <Route path="get-involved" element={<GetInvolve />} />
+        <Route path="news" element={<News />} />
+        <Route path="project" element={<Project />} />
+        <Route path="resources" element={<Resources />} />
+        <Route path="/:psudoname/editproifle" element={<EditProfile />} />
+        <Route path="profile/:psudoname" element={<Profile />} />
+        <Route path="video" element={<Video />} />
+        <Route path="/skeleton" element={<LandingSkeleton />} />
+        <Route path="admin" element={<AdminPage />} />
+
+        {/* Admin routes */}
+        <Route element={<RequiredAuth />}>
+          {/* <Route path="admin" element={<Admin />} /> */}
+          <Route path="admin/users" element={<Users />} />
+          <Route path="projects" element={<AdminProject />} />
+          <Route path="users" element={<Users />} />
+        </Route>
+      </Route>
+      {/* global routes */}
+        <Route path="/eginews" element={<DetailPage />} />
+        // <Route path="/news/:eid" element={<DetailPage />} />
+      <Route path="content" element={<ContentManagement />} />
+      <Route path="register" element={<Register />} />
+      <Route path="login" element={<Login />} />
+      <Route path="loginOld" element={<LoginOld />} />
+      {/* if route is not found */}
+      <Route path="/*" element={<PageNotFound />} />
+    </Routes>
   );
 }
 

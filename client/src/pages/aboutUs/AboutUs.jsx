@@ -3,7 +3,7 @@ import "../aboutUs/AboutUs.css";
 import { FaLowVision } from "react-icons/fa";
 import Card from "./Card";
 import { organization, profilePictures } from "../../sources";
-import Title from "../../components/utils/title/Title";
+import Title from "../../components/Title";
 import Button from "../../components/utils/Button";
 import Wrapper from "../../components/styles/AboutUs";
 
@@ -11,8 +11,6 @@ const AboutUs = () => {
   const [teamMembers, setTeamMembers] = useState(profilePictures);
   const [organizations, setOrganizations] = useState(organization);
   // useRef
-
-
 
   return (
     <Wrapper>
