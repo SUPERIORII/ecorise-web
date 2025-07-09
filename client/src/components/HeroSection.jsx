@@ -98,7 +98,7 @@ const HeroSection = () => {
 
         <div className="slides-btn">
           <FaChevronCircleLeft
-            className={`w-10 h-10 absolute cursor-pointer opacity-50 top-[50%] left-[1%] hover:opacity-100 transition-opacity focus-within:opacity-100 ${
+            className={`w-10 h-10 absolute cursor-pointer  top-[50%] left-[1%] transition-opacity focus-within:opacity-100 ${
               currentItem === 0 && "hidden"
             }`}
             // {currentItem === 0 ? "slide-left hide" : "slide-left"}

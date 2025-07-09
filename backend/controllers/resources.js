@@ -1,4 +1,4 @@
-const db = require("../database");
+const db = require("../database/database");
 
 // get latest news
 const getResources = (req, res) => {

@@ -8,12 +8,12 @@ const {
   // getSingleNews,
   // fetchnews,
 } = require("../controllers/news");
-const db = require("../database");
+const db = require("../database/database");
 
 router.get("/", getNews);
 router.post("/", addNews);
 
-// first 3 latest news  
+// first 3 latest news
 router.get("/latestNews", latestNews);
 
 // Get specific News by their by the news slug

@@ -57,44 +57,58 @@ const HomeNews = () => {
 
 
   return (
-    <div className="">
-      <SectionTitle Title="Latest News" />
-      {isError ? (
-        "error occur"
-      ) : isLoading ? (
-        "loading"
-      ) : (
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {data.map((news) => {
-            return (
-              <div key={news.id}>
-                <ElementGrid url={ENDPOINTS.SPECIFIC_QUERY_NEWS + news.news_slug} {...news} />
-              </div>
-              // <section className="home-news" key={news.news_id}>
-              //   <div className="homenews-img-preview">
-              //     <img src={news.news_img} alt="img" />
-              //   </div>
+    <>
+      <div className="">
+        <SectionTitle Title="Latest News" />
+        {isError ? (
+          "error occur"
+        ) : isLoading ? (
+          "loading"
+        ) : (
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {data.map((news) => {
+              return (
+                <div key={news.id}>
+                  <ElementGrid
+                    url={ENDPOINTS.SPECIFIC_QUERY_NEWS + news.news_slug}
+                    {...news}
+                  />
+                </div>
+                // <section className="home-news" key={news.news_id}>
+                //   <div className="homenews-img-preview">
+                //     <img src={news.news_img} alt="img" />
+                //   </div>
 
-              //   <div className="latest-info">
-              //     <span>#{news.category}</span>
+                //   <div className="latest-info">
+                //     <span>#{news.category}</span>
 
-              //     <h4 className="preview-title">{news.title}</h4>
+                //     <h4 className="preview-title">{news.title}</h4>
 
-              //     <p className="homenews-preview-duration">
-              //       {moment(news.created_date).format("MMMM DD YYYY")} &#126;
-              //       {moment(news.created_date).fromNow()}
-              //     </p>
-              //   </div>
+                //     <p className="homenews-preview-duration">
+                //       {moment(news.created_date).format("MMMM DD YYYY")} &#126;
+                //       {moment(news.created_date).fromNow()}
+                //     </p>
+                //   </div>
 
-              //   <Link to={`/news/${news.news_id}`}>
-              //     <button>View Detail</button>
-              //   </Link>
-              // </section>
-            );
-          })}
-        </div>
-      )}
-    </div>
+                //   <Link to={`/news/${news.news_id}`}>
+                //     <button>View Detail</button>
+                //   </Link>
+                // </section>
+              );
+            })}
+          </div>
+        )}
+      </div>
+
+      <ElementGrid
+        url="/profile"
+        category="Movie"
+        description="this is a description"
+        news_img="./src/assets/images/img-5.jpg"
+        title="Title"
+        key={1}
+      />
+    </>
   );
 };
 

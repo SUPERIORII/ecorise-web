@@ -5,9 +5,10 @@ const {
   latestProjects,
   getProjects,
 } = require("../controllers/projects");
+const isAuthenticated = require("../middlewires/isAuthenticated");
 const router = express.Router();
 
-router.post("/", addProjects);
+router.post("/", isAuthenticated, addProjects);
 router.get("/", getProjects);
 
 // additional route to be spe

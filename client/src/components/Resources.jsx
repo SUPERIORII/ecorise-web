@@ -4,6 +4,9 @@ import { useQuery } from "@tanstack/react-query";
 import customUrl from "../basedUrl";
 
 const Resources = () => {
+  const resources =[{
+    category:"movies",
+  }]
   const { isError, isLoading, data } = useQuery({
     queryKey: ["latestResources"],
     queryFn: async () => {
@@ -17,6 +20,7 @@ const Resources = () => {
   return (
     <div className="resources-ergi-container">
       <p className="resource-title">{"Resources".toUpperCase()}</p>
+      
 
       <section className="resource-flex">
         {isError
@@ -27,15 +31,15 @@ const Resources = () => {
               console.log(resources);
 
               return (
-                <div className="resource-list" key={resources.id}>
+                <div className="resource-list">
                   <img
-                    src={resources.resources_thumbnail}
-                    alt={resources.category}
+                    src="/src/assets/03a6acdf091c4972ac8bcc3e65d010de.jpg"
+                    alt="aaaa"
                   />
 
                   <div className="resource-desc">
-                    <span className="title">{resources.category}</span>
-                    <p className="resources-desc">{resources.description}</p>
+                    <span className="title">Category</span>
+                    <p className="resources-desc">Resources description</p>
 
                     <button>
                       {resources.category === "article"

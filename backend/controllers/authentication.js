@@ -1,19 +1,18 @@
-const db = require("../database");
+const db = require("../database/pool");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const session = require("express-session");
 require("dotenv").config();
-const getShadowName = require("./generateObfuscateName")
+const getShadowName = require("./generateObfuscateName");
 
 // user session
 
 const register = async (req, res) => {
   const { username, email, password, role } = req.body;
-  const randomString = getShadowName(6)
-  
-  const shadowName = `${username}_${randomString}`
+  const randomString = getShadowName(6);
+
+  const shadowName = `${username}_${randomString}`;
   const hashPassword = await bcrypt.hash(password, 10);
- 
 
   // check if the cookies is still valid
   const token = req.cookies.infoToken;
@@ -30,7 +29,11 @@ const register = async (req, res) => {
 
       // // check if user role is not super admin to not register new user
       if (adminRole === "admin") {
-        res.status(403).json("Access denied!! You do not have permission to register users!!");
+        res
+          .status(403)
+          .json(
+            "Access denied!! You do not have permission to register users!!"
+          );
         return;
       }
 
@@ -64,49 +67,45 @@ const register = async (req, res) => {
 };
 
 // user login
-const login = (req, res) => {
-  // get the field data from the form
-  const { email, password } = req.body;
-
+const login = async (req, res) => {
   try {
+    // get the field data from the form
+    const { email, loginPassword } = req.body;
+
     // fetch the user and check if the user exist in the database
     const query = `SELECT * FROM users WHERE email = ?`;
 
-    db.query(query, [email], async (err, result) => {
-      if (err) throw err;
+    const [isUserData] = await db.query(query, [email]);
+    if (isUserData.length === 0) {
+      return res.status(401).json({ error: "The account do not exist!!" });
+    }
 
-      if (result.length === 0)
-        return res.status(401).json("The account do not exist!!");
+    // if email exist, compare the password
+    const comparePassword = await bcrypt.compare(
+      loginPassword,
+      isUserData[0].password
+    );
+    console.log("comparedPassword:", comparePassword);
 
-      // if email exist, compare the password
-      const comparePassword = await bcrypt.compare(
-        password,
-        result[0].password
-      );
+    if (!comparePassword)
+      return res.status(401).json({ error: "Invadid email or password!!" });
 
-      if (!comparePassword)
-        return res.status(401).json("Invadid email or password!!");
+    // store the user id in the json web token to get data later if their password is correct
+    const token = jwt.sign({ userId: isUserData[0].id }, process.env.SECRET, {expiresIn:"24h"});
+    const { password, ...others } = isUserData[0];
 
-      if (comparePassword !== 0) {
-        // store the id key in the json web token to get data later
-        const token = jwt.sign({ userId: result[0].id }, process.env.SECRET);
+    res
+      .cookie(process.env.INFOTOKEN, token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "Strict",
+        maxAge: 16666666,
+        })
+      .status(200)
+      .json("login successful");
 
-        const { password, ...others } = result[0];
-
-        // store the user token in the session storage
-        res
-          .cookie(process.env.INFOTOKEN, token, {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === "production",
-            sameSite: "Strict",
-            maxAge: 16666666,
-            // secure: true
-          })
-          .status(200)
-          .json("login successful");
-      }
-    });
   } catch (err) {
+    res.json({ error: "Inter server error" });
     console.log(err);
   }
 };

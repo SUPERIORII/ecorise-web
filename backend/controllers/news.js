@@ -1,4 +1,4 @@
-const db = require("../database");
+const db = require("../database/database");
 const jwt = require("jsonwebtoken");
 const moment = require("moment");
 const { v4: uuid } = require("uuid");

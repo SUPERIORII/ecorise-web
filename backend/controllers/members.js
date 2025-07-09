@@ -1,4 +1,4 @@
-const db = require("../database");
+const db = require("../database/database");
 
 const getLatestMembers = (req, res) => {
   const query = `SELECT s.id AS sociallink_id, s.facebook_Url, s.whatsapp_Url, s.instagram_Url, s.user_id, u.username,u.shadowname AS psudo_name, u.user_profile, u.user_role FROM social_links AS s JOIN users 
@@ -11,6 +11,7 @@ const getLatestMembers = (req, res) => {
     res.status(200).json(result);
   });
 };
+
 const getAllembers = (req, res) => {
   res.json("getting all users");
 };

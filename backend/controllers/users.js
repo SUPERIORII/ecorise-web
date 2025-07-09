@@ -1,4 +1,4 @@
-const db = require("../database");
+const db = require("../database/database");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const getShadowName = require("./generateObfuscateName");
@@ -11,7 +11,6 @@ const addUser = async (req, res) => {
   const shadowName = `${username}_${randomString}`;
   const hashPassword = await bcrypt.hash(password, 10);
   const userProfile = profile ? profile : "user-solid.svg";
-
 
   // check if the cookies is still valid
   const token = req.cookies.infoToken;

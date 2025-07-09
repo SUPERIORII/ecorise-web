@@ -49,7 +49,7 @@ app.use((req, res, next) => {
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: ["http://localhost:5173", "http://localhost:3000"],
   })
 );
 
@@ -61,8 +61,8 @@ const userRoute = require("./routes/user");
 const projectRoute = require("./routes/project");
 const membersRoute = require("./routes/member");
 const menuLinksRoute = require("./routes/menuLinks");
-const resourcesRoute = require("./routes/resources")
-const db = require("./database");
+const resourcesRoute = require("./routes/resources");
+const db = require("./database/database");
 
 app.post("/api/upload", upload.single("file"), (req, res) => {
   res.json(req.file);
@@ -94,7 +94,7 @@ app.get("/", (req, res) => {
 //   try {
 //     const [homeProjects] = await db.promise().query(
 //       `SELECT p.id, p.title, p.created_date, p.description AS projectDesc, p.project_img AS project_url,
-//        u.id AS usersId, u.shadowname, u.user_profile AS user_img, u.username FROM project p JOIN users 
+//        u.id AS usersId, u.shadowname, u.user_profile AS user_img, u.username FROM project p JOIN users
 //        u ON(u.id=p.user_id) ORDER BY p.created_date DESC LIMIT 2 OFFSET ?`,
 //       [offSet]
 //     );
@@ -116,7 +116,7 @@ app.get("/", (req, res) => {
 //       dataLength: feed.length,
 //       page: page,
 //     });
- 
+
 //   } catch (error) {
 //     console.error(error);
 //   }
@@ -131,6 +131,6 @@ app.get("/", (req, res) => {
 // });
 
 app.listen(
-  3000,
-  console.log(`server is listening on port http://localhost:3000`)
+  5000,
+  console.log(`server is listening on port http://localhost:5000`)
 );
